@@ -37,399 +37,390 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="container nav-inner">
-      <a href="/" class="nav-logo" aria-label="Vibe Gate home">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <polyline points="9,12 11,14 15,10"/>
+    </svg>
+    Vibe Gate
+  </a>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#checks">Checks</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+    <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" class="btn-nav" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+    <a href="#install" class="btn-nav primary">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="install">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Open source · MIT License
+    </div>
+    <h1>Ship AI apps<br><em>without blind spots.</em></h1>
+    <p class="hero-sub">
+      One command scans any web app for broken flows, security holes, and auth gaps. No config. No signup. Just results.
+    </p>
+    <div class="hero-ctas">
+      <a href="#how" class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5,3 19,12 5,21"/></svg>
+        See how it works
+      </a>
+      <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" class="btn btn-ghost" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+    <!-- Terminal -->
+    <div class="terminal-wrap reveal">
+      <div class="terminal-bar">
+        <div class="terminal-dot" style="background:#ff5f57"></div>
+        <div class="terminal-dot" style="background:#febc2e"></div>
+        <div class="terminal-dot" style="background:#28c840"></div>
+        <span style="font-family:var(--font-mono);font-size:11px;color:var(--text-faint);margin-left:auto">vibe-gate</span>
+      </div>
+      <div class="terminal-body">
+        <div class="t-line"><span class="t-dim">$</span><span class="t-cmd">npx vibe-gate</span><span class="t-url">https://your-app.com</span></div>
+        <div class="t-gap"></div>
+        <div class="t-line"><span class="t-pass">✓ PASS</span> <span class="t-label">Page Health</span> <span class="t-score">99%</span> <span class="t-dim">— Loaded in 94ms</span></div>
+        <div class="t-line"><span class="t-pass">✓ PASS</span> <span class="t-label">Console Errors</span> <span class="t-score">100%</span> <span class="t-dim">— 0 errors found</span></div>
+        <div class="t-line"><span class="t-warn">⚠ WARN</span> <span class="t-label">Security Headers</span> <span class="t-score">63%</span> <span class="t-dim">— 4 missing headers</span></div>
+        <div class="t-line"><span class="t-pass">✓ PASS</span> <span class="t-label">Secrets Exposure</span> <span class="t-score">100%</span> <span class="t-dim">— none found</span></div>
+        <div class="t-line"><span class="t-pass">✓ PASS</span> <span class="t-label">Auth Coverage</span> <span class="t-score">100%</span> <span class="t-dim">— all routes protected</span></div>
+        <div class="t-gap"></div>
+        <div class="t-line"><span class="t-grade">Grade: A</span> <span class="t-dim">·</span> <span class="t-score">Score: 91%</span></div>
+        <div class="t-line"><span class="t-summary">Looking good! Fix 4 security headers to reach 100%.</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--space-5);display:flex;align-items:center;gap:var(--space-3);justify-content:center;flex-wrap:wrap">
+      <div class="cmd-box" id="cmd">
+        <span class="t-dim">$</span>
+        <code>npx vibe-gate https://your-app.com</code>
+        <button class="cmd-copy" onclick="copyCmd()" id="copyBtn">Copy</button>
+      </div>
+    </div>
+    <p style="font-size:var(--text-xs);color:var(--text-faint);margin-top:var(--space-3)">Works with Vercel · Netlify · Railway · any deployed URL</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">Three steps to a full report</h2>
+      <p class="section-desc">No setup. No learning curve. Point it at your app, get actionable findings in seconds.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-card reveal" style="transition-delay:0.05s">
+        <div class="how-num">01</div>
+        <h3>Run the command</h3>
+        <p><code style="font-family:var(--font-mono);font-size:0.85em;color:var(--accent)">npx vibe-gate https://your-app.com</code> — Playwright launches and scans your live app automatically.</p>
+      </div>
+      <div class="how-card reveal" style="transition-delay:0.1s">
+        <div class="how-num">02</div>
+        <h3>Get your grade</h3>
+        <p>Color-coded A–F grade across 5 categories. Each check shows pass/warn/fail with specific, named findings.</p>
+      </div>
+      <div class="how-card reveal" style="transition-delay:0.15s">
+        <div class="how-num">03</div>
+        <h3>Fix and ship</h3>
+        <p>Plain-English recommendations tell you exactly what to fix. No jargon, no vague warnings, no false positives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT CHECKS -->
+<section id="checks" style="background:var(--surface-2)">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Coverage</div>
+      <h2 class="section-title">15+ checks, 5 categories</h2>
+      <p class="section-desc">Every scan gives you a complete picture of your app's health — from load time to auth gaps.</p>
+    </div>
+    <div class="checks-bento">
+      <div class="check-card c1 reveal" style="transition-delay:0.05s">
+        <div class="check-icon" style="background:var(--pass-dim)">⚡</div>
+        <div class="check-pct">99%</div>
+        <h3>Page Health</h3>
+        <p>Load success, HTTP status, render time, and title detection.</p>
+      </div>
+      <div class="check-card c2 reveal" style="transition-delay:0.1s">
+        <div class="check-icon" style="background:var(--error-dim)">🪲</div>
+        <div class="check-pct">100%</div>
+        <h3>Console Errors</h3>
+        <p>JS errors, 404s, and API failures caught from the browser console.</p>
+      </div>
+      <div class="check-card c3 reveal" style="transition-delay:0.15s">
+        <div class="check-icon" style="background:var(--warn-dim)">🔒</div>
+        <div class="check-pct" style="color:var(--warn)">63%</div>
+        <h3>Security Headers</h3>
+        <p>CSP, HSTS, X-Frame-Options — checks 6 critical security headers.</p>
+      </div>
+      <div class="check-card c4 reveal" style="transition-delay:0.2s">
+        <div class="check-icon" style="background:rgba(129,140,248,0.12)">🗝️</div>
+        <div class="check-pct">100%</div>
+        <h3>Secrets Detection</h3>
+        <p>Scans for exposed API keys, tokens, and credentials in your app's source. Catches the kind of leaks that get devs fired.</p>
+      </div>
+      <div class="check-card c5 reveal" style="transition-delay:0.25s">
+        <div class="check-icon" style="background:rgba(0,212,170,0.1)">🛡️</div>
+        <div class="check-pct">100%</div>
+        <h3>Auth Coverage</h3>
+        <p>Detects unprotected routes, missing login pages, and auth gaps before your users — or attackers — do.</p>
+      </div>
+      <div class="check-card c6 reveal" style="transition-delay:0.3s">
+        <div class="c6-inner">
+          <div>
+            <div class="check-icon" style="background:var(--accent-dim)">📁</div>
+            <h3 style="font-size:var(--text-base);margin-bottom:var(--space-2)">Local Code Scan</h3>
+            <p style="font-size:var(--text-sm);color:var(--text-muted);max-width:40ch">Run <code style="font-family:var(--font-mono);font-size:0.85em;background:var(--surface);padding:2px 6px;border-radius:4px;color:var(--accent)">vibe-gate scan .</code> to check your local project for issues <em>before</em> you deploy. Catch problems at the source.</p>
+          </div>
+          <div class="c6-code">
+            <div><span style="color:var(--text-faint)">$</span> <span style="color:var(--text-muted)">vibe-gate scan .</span></div>
+            <div>&nbsp;</div>
+            <div><span class="pass">✓</span> No secrets in /src</div>
+            <div><span class="pass">✓</span> HTTPS enforced</div>
+            <div><span class="warn">⚠</span> Missing Content-Security-Policy</div>
+            <div><span class="pass">✓</span> No exposed .env files</div>
+            <div>&nbsp;</div>
+            <div><span class="accent">Grade: B+</span> · Score: 84%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">CLI is free forever</h2>
+      <p class="section-desc">Cloud dashboard for teams coming soon. The scanner will always be open-source and free.</p>
+    </div>
+    <div class="pricing-grid">
+      <!-- Free -->
+      <div class="pricing-card reveal" style="transition-delay:0.05s">
+        <div class="price-tier">Free</div>
+        <div class="price-amount"><span class="num">$0</span><span class="per">/mo</span></div>
+        <div class="price-desc">For solo developers and indie hackers.</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>CLI access via <code style="font-family:var(--font-mono);font-size:0.85em;background:var(--surface-offset);padding:1px 5px;border-radius:3px;color:var(--accent)">npx vibe-gate</code></li>
+          <li>GitHub Actions support</li>
+          <li>Unlimited scans</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#install" class="price-btn accent">Get Started Free</a>
+      </div>
+      <!-- Pro -->
+      <div class="pricing-card featured dim reveal" style="transition-delay:0.1s;position:relative">
+        <div class="pricing-badge">Coming Soon</div>
+        <div class="price-tier">Pro</div>
+        <div class="price-amount"><span class="num">$29</span><span class="per">/mo</span></div>
+        <div class="price-desc">For professional developers and small teams.</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Everything in Free</li>
+          <li>Hosted dashboard</li>
+          <li>Scheduled scans (daily)</li>
+          <li>Slack alerts</li>
+          <li>90-day scan history</li>
+          <li>10 projects</li>
+        </ul>
+        <a href="mailto:praveen@vibe-gate.dev?subject=Pro Plan Access" class="price-btn ghost">Join Waitlist</a>
+      </div>
+      <!-- Growth -->
+      <div class="pricing-card dim reveal" style="transition-delay:0.15s">
+        <div class="coming-badge">Coming Soon</div>
+        <div class="price-tier">Growth</div>
+        <div class="price-amount"><span class="num">$79</span><span class="per">/mo</span></div>
+        <div class="price-desc">For growing teams shipping AI-generated code.</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Everything in Pro</li>
+          <li>50 projects</li>
+          <li>5 team seats</li>
+          <li>SSO / SAML</li>
+          <li>1-year scan history</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="mailto:praveen@vibe-gate.dev?subject=Growth Plan Access" class="price-btn ghost">Join Waitlist</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--surface-2)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:var(--space-16);align-items:start">
+      <div class="reveal">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title" style="font-size:var(--text-xl)">Questions?</h2>
+        <p class="section-desc" style="font-size:var(--text-sm)">Everything you need to know. Can't find an answer? <a href="mailto:praveen@vibe-gate.dev" style="color:var(--accent);border-bottom:1px solid rgba(0,212,170,0.3)">Email us.</a></p>
+      </div>
+      <div class="faq-list reveal" style="transition-delay:0.1s">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What does Vibe Gate actually check?
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="faq-a">Vibe Gate runs your URL in a headless Playwright browser and checks 5 categories: page health (does it load?), console errors (broken JS/API calls), security headers (CSP, HSTS, etc.), secrets exposure (leaked API keys), and auth coverage (unprotected routes). Each category gets a score, weighted by severity.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Do I need to install anything?
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="faq-a">No. <code>npx vibe-gate</code> runs directly from npm. It downloads Playwright on first run (one-time ~30MB), then works offline. You can also install globally with <code>npm install -g vibe-gate</code>.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Will it work on localhost or staging?
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="faq-a">Yes. Point it at any URL Playwright can reach — localhost, staging, production. For local dev servers use <code>vibe-gate http://localhost:3000</code>. The <code>scan .</code> command checks your local filesystem directly.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How is it different from CodeRabbit or SonarQube?
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="faq-a">Those tools require CI/CD pipelines, Git integration, and developer expertise. Vibe Gate works on any deployed app with one command — no pipeline, no config, no jargon. It's built for the new class of builders shipping with AI coding tools.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Can I use it in CI/CD?
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="faq-a">Yes. The CLI exits with code 1 if the grade is below your threshold (<code>--threshold B</code>). Use it in GitHub Actions to gate PRs from AI-generated code. A <code>vibe-gate scan</code> GitHub Action workflow is included in the repo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="reveal">
+      <h2>Run it on your app right now.</h2>
+      <p>No signup. No commitment. One command.</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:var(--space-3);flex-wrap:wrap">
+        <div class="cta-cmd">
+          <span style="color:var(--text-faint);font-family:var(--font-mono)">$</span>
+          <span style="font-family:var(--font-mono)">npx vibe-gate https://your-app.com</span>
+          <button onclick="copyCmdCta()" id="copyCta" class="cmd-copy">Copy</button>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-2)">
+        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" class="btn btn-ghost" target="_blank" rel="noopener" style="font-size:var(--text-xs)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="/" class="nav-logo" style="font-size:var(--text-xs)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9,12 11,14 15,10"/></svg>
         Vibe Gate
       </a>
-      <div class="nav-links" id="navLinks">
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
-        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="/dashboard" class="btn btn-primary btn-sm">Dashboard</a>
+      <div class="footer-links">
+        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate/blob/master/LICENSE" target="_blank" rel="noopener">MIT License</a>
+        <a href="https://vibe-gate.vercel.app/dashboard" target="_blank" rel="noopener">Dashboard</a>
       </div>
-      <div style="display:flex;align-items:center;gap:var(--space-2)">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">
-          <svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        </button>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+      <div class="footer-copy">Built by <a href="https://github.com/PraveenJayaprakash-JP" target="_blank" rel="noopener">Praveen Jayaprakash</a></div>
     </div>
-  </nav>
-  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  </div>
+</footer>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero" aria-label="Hero">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="hero-grid"></div>
-      </div>
-      <div class="container">
-        <div class="hero-inner">
-          <div class="hero-badge">
-            <span class="dot" aria-hidden="true"></span>
-            Open source CLI tool
-          </div>
-          <h1 class="heading-1 hero-title">Ship AI-generated apps<br>with confidence.</h1>
-          <p class="hero-subtitle">Vibe Gate scans any web app for broken flows, security holes, and auth gaps — in one command. Free, open-source, zero config.</p>
-          <div class="hero-cta">
-            <a href="#install" class="btn btn-primary btn-lg">Get Started</a>
-            <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              GitHub
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+<script>
+// Theme toggle
+(function(){
+  const btn = document.querySelector('[data-theme-toggle]');
+  const root = document.documentElement;
+  let theme = 'dark';
+  root.setAttribute('data-theme', theme);
+  if(btn) btn.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', theme);
+    btn.innerHTML = theme === 'dark'
+      ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      : '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  });
+})();
 
-    <!-- Install -->
-    <section class="section" id="install" aria-labelledby="install-heading">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="heading-2" id="install-heading">One command to check any app</h2>
-          <p>No install required. No config file needed. Just point it at your deployed app and get your grade.</p>
-        </div>
-        <div class="terminal-box" role="group" aria-label="Installation command">
-          <span class="prompt" aria-hidden="true">$</span>
-          <span class="cmd" id="installCmd">npx vibe-gate https://your-app.com</span>
-          <button class="copy-btn" id="copyBtn" aria-label="Copy command to clipboard">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          </button>
-        </div>
-      </div>
-    </section>
+// Copy command
+function copyCmd() {
+  navigator.clipboard.writeText('npx vibe-gate https://your-app.com').then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    btn.style.color = 'var(--accent)';
+    setTimeout(() => { btn.textContent = 'Copy'; btn.style.color = ''; }, 2000);
+  });
+}
+function copyCmdCta() {
+  navigator.clipboard.writeText('npx vibe-gate https://your-app.com').then(() => {
+    const btn = document.getElementById('copyCta');
+    btn.textContent = 'Copied!';
+    btn.style.color = 'var(--accent)';
+    setTimeout(() => { btn.textContent = 'Copy'; btn.style.color = ''; }, 2000);
+  });
+}
 
-    <!-- CLI Demo -->
-    <section class="section section-alt" aria-labelledby="demo-heading">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="heading-2" id="demo-heading">See it in action</h2>
-          <p>Run a full scan and get a detailed breakdown of what needs attention.</p>
-        </div>
-        <div class="cli-demo">
-          <div class="cli-window">
-            <div class="cli-header">
-              <span class="cli-dot red" aria-hidden="true"></span>
-              <span class="cli-dot yellow" aria-hidden="true"></span>
-              <span class="cli-dot green" aria-hidden="true"></span>
-              <span class="cli-title">vibe-gate scan</span>
-            </div>
-            <div class="cli-body">
-              <div class="line"><span class="dim">$</span> <span class="accent">npx vibe-gate</span> https://demo-app.vercel.app</div>
-              <div class="line dim">Scanning 12 pages, 47 routes...</div>
-              <div class="line"> </div>
-              <div class="line"><span class="label">Auth &amp; Access</span><span class="grade-a">A</span></div>
-              <div class="line"><span class="label">Forms &amp; Inputs</span><span class="grade-b">B+</span></div>
-              <div class="line"><span class="label">Navigation</span><span class="grade-a">A</span></div>
-              <div class="line"><span class="label">Security Headers</span><span class="grade-c">C</span></div>
-              <div class="line"><span class="label">Performance</span><span class="grade-b">B</span></div>
-              <div class="line"><span class="label">Accessibility</span><span class="grade-c">C+</span></div>
-              <div class="line"> </div>
-              <div class="line"><span class="check">[PASS]</span> 3 issues auto-fixable</div>
-              <div class="line"><span class="warn">[WARN]</span> 2 warnings need review</div>
-              <div class="line"> </div>
-              <div class="cli-summary">
-                <span class="big-grade">A-</span>
-                <span class="dim">Overall grade — 87/100</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+// FAQ accordion
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
 
-    <!-- How It Works -->
-    <section class="section" aria-labelledby="steps-heading">
-      <div class="container container-wide">
-        <div class="section-header">
-          <h2 class="heading-2" id="steps-heading">How it works</h2>
-          <p>Three steps from zero to a clean bill of health.</p>
-        </div>
-        <div class="steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <h3>Run</h3>
-            <p>Point the CLI at any live URL. No config, no setup. It crawls every route automatically.</p>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <h3>Grade</h3>
-            <p>Get an instant letter grade across six categories, from auth to accessibility.</p>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <h3>Fix</h3>
-            <p>Follow the actionable report. Some fixes are one-liners; others get detailed guidance.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    <!-- Features -->
-    <section class="section section-alt" id="features" aria-labelledby="features-heading">
-      <div class="container container-wide">
-        <div class="section-header">
-          <h2 class="heading-2" id="features-heading">Everything you need to ship clean</h2>
-          <p>Deep scans, clear grades, and actionable fixes — all from your terminal.</p>
-        </div>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-            </div>
-            <h3>Security Scan</h3>
-            <p>Detects missing headers, exposed secrets, insecure forms, and auth bypass paths before they hit production.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            </div>
-            <h3>Route Audit</h3>
-            <p>Crawls every page and checks for broken links, missing metadata, duplicate titles, and orphaned routes.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            </div>
-            <h3>Auth Checks</h3>
-            <p>Validates login flows, session handling, password rules, and protected-route enforcement end to end.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            </div>
-            <h3>Performance</h3>
-            <p>Measures load times, asset sizes, render-blocking resources, and Core Web Vitals at the route level.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-            <h3>Accessibility</h3>
-            <p>Flags missing labels, low contrast, keyboard traps, and ARIA issues with WCAG-aligned severity.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            </div>
-            <h3>CI/CD Ready</h3>
-            <p>Exit codes, JSON output, and GitHub Actions support let you block merges on failing grades.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.pageYOffset > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+</script>
 
-    <!-- Pricing -->
-    <section class="section" id="pricing" aria-labelledby="pricing-heading">
-      <div class="container container-wide">
-        <div class="section-header">
-          <h2 class="heading-2" id="pricing-heading">Simple pricing</h2>
-          <p>Start free. Upgrade when you need more power.</p>
-        </div>
-        <div class="pricing-grid">
-          <div class="pricing-card">
-            <h3>Free</h3>
-            <div class="price">$0<span>/month</span></div>
-            <p class="desc">Perfect for side projects and open-source work.</p>
-            <ul>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 50 scans / month</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Basic reports</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Community support</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Open-source CLI</li>
-            </ul>
-            <a href="#install" class="btn btn-secondary">Get Started</a>
-          </div>
-          <div class="pricing-card popular">
-            <span class="pricing-badge">Popular</span>
-            <h3>Pro</h3>
-            <div class="price">$29<span>/month</span></div>
-            <p class="desc">For indie hackers and small teams shipping regularly.</p>
-            <ul>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Unlimited scans</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Detailed reports</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> CI/CD integration</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Priority support</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Team dashboard</li>
-            </ul>
-            <a href="#install" class="btn btn-primary">Start Pro Trial</a>
-          </div>
-          <div class="pricing-card">
-            <h3>Growth</h3>
-            <div class="price">$79<span>/month</span></div>
-            <p class="desc">For teams that need scale, compliance, and custom rules.</p>
-            <ul>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Everything in Pro</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Custom rule engine</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> SSO &amp; SAML</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Dedicated support</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> SLA guarantee</li>
-            </ul>
-            <a href="#install" class="btn btn-secondary">Contact Sales</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section section-alt" id="faq" aria-labelledby="faq-heading">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="heading-2" id="faq-heading">Frequently asked questions</h2>
-          <p>Everything you need to know before you scan.</p>
-        </div>
-        <div class="faq-list">
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" aria-controls="faq1">
-              What does Vibe Gate actually scan?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="faq-answer" id="faq1">
-              <div class="faq-answer-inner">It checks authentication flows, form validation, security headers, navigation integrity, accessibility basics, and performance metrics. Think of it as a pre-flight checklist for web apps.</div>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" aria-controls="faq2">
-              Do I need to install anything?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="faq-answer" id="faq2">
-              <div class="faq-answer-inner">Nope. You can run it with npx without installing. If you want it globally, npm install -g vibe-gate works too.</div>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" aria-controls="faq3">
-              Is my app data safe during a scan?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="faq-answer" id="faq3">
-              <div class="faq-answer-inner">Yes. The CLI only reads publicly available pages and headers. It does not submit forms, upload files, or modify anything on your server.</div>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" aria-controls="faq4">
-              Can I use it in CI/CD?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="faq-answer" id="faq4">
-              <div class="faq-answer-inner">Absolutely. It returns exit codes based on grade thresholds and supports JSON output for easy parsing in GitHub Actions, GitLab CI, or any pipeline.</div>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" aria-controls="faq5">
-              What frameworks are supported?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="faq-answer" id="faq5">
-              <div class="faq-answer-inner">Any framework that renders to HTML. Next.js, React, Vue, Svelte, Astro, Rails, Django, Laravel — if it has URLs, Vibe Gate can scan it.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta-section" aria-labelledby="cta-heading">
-      <div class="container">
-        <h2 class="heading-2" id="cta-heading">Ready to ship with confidence?</h2>
-        <p>Join thousands of developers who catch issues before their users do.</p>
-        <div class="hero-cta">
-          <a href="#install" class="btn btn-primary btn-lg">Get Started Free</a>
-          <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            Star on GitHub
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-left">
-        <a href="/" class="nav-logo" aria-label="Vibe Gate home">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-          Vibe Gate
-        </a>
-        <span>MIT License</span>
-      </div>
-      <div class="footer-right">
-        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://twitter.com/Praveen_JP" target="_blank" rel="noopener noreferrer">Twitter</a>
-        <span>Built by Praveen Jayaprakash</span>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    /* Theme Toggle */
-    (function(){
-      const html=document.documentElement;
-      const toggle=document.getElementById('themeToggle');
-      const moon=document.getElementById('moonIcon');
-      const sun=document.getElementById('sunIcon');
-      const stored=localStorage.getItem('vibe-gate-theme');
-      const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
-      function setTheme(theme){
-        html.setAttribute('data-theme',theme);
-        localStorage.setItem('vibe-gate-theme',theme);
-        if(theme==='light'){moon.style.display='none';sun.style.display='block'}
-        else{moon.style.display='block';sun.style.display='none'}
-      }
-      if(stored){setTheme(stored)}
-      else{setTheme(prefersDark?'dark':'light')}
-      toggle.addEventListener('click',function(){
-        setTheme(html.getAttribute('data-theme')==='dark'?'light':'dark');
-      });
-    })();
-
-    /* Mobile Nav */
-    (function(){
-      const navToggle=document.getElementById('navToggle');
-      const navLinks=document.getElementById('navLinks');
-      const overlay=document.getElementById('navOverlay');
-      function open(){navLinks.classList.add('open');overlay.classList.add('open');navToggle.setAttribute('aria-expanded','true')}
-      function close(){navLinks.classList.remove('open');overlay.classList.remove('open');navToggle.setAttribute('aria-expanded','false')}
-      navToggle.addEventListener('click',function(){navLinks.classList.contains('open')?close():open()});
-      overlay.addEventListener('click',close);
-      navLinks.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close)});
-      document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
-    })();
-
-    /* Copy Button */
-    (function(){
-      const btn=document.getElementById('copyBtn');
-      const cmd=document.getElementById('installCmd');
-      btn.addEventListener('click',function(){
-        navigator.clipboard.writeText(cmd.textContent).then(function(){
-          btn.classList.add('copied');
-          btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
-          setTimeout(function(){btn.classList.remove('copied');btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';},2000);
-        });
-      });
-    })();
-
-    /* FAQ Accordion */
-    (function(){
-      const items=document.querySelectorAll('.faq-item');
-      items.forEach(function(item){
-        const btn=item.querySelector('.faq-question');
-        btn.addEventListener('click',function(){
-          const expanded=btn.getAttribute('aria-expanded')==='true';
-          items.forEach(function(i){i.querySelector('.faq-question').setAttribute('aria-expanded','false');i.classList.remove('open')});
-          if(!expanded){btn.setAttribute('aria-expanded','true');item.classList.add('open')}
-        });
-      });
-    })();
-  </script>
 </body>
 </html>
