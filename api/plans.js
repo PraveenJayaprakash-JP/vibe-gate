@@ -17,25 +17,25 @@ export default function handler(req, res) {
       {
         id: 'pro',
         name: 'Pro',
-        price: 2900, // $29
+        price: 900, // $9
         currency: 'usd',
         interval: 'month',
-        stripePriceId: 'price_1TgQrmImrFBa2nkGuQbl9jcj',
+        stripePriceId: 'price_1TgTFTImrFBa2nkGfL3ydLgX',
         features: ['Everything in Free', 'Hosted dashboard', 'Scheduled scans (daily)', 'Slack alerts', 'Scan history (90 days)', '10 projects', 'Email support'],
-        cta: 'Coming Soon',
-        ctaLink: 'mailto:praveen@vibe-gate.dev',
+        cta: 'Buy Now',
+        ctaLink: 'https://vibe-gate.dev/api/checkout?priceId=price_1TgTFTImrFBa2nkGfL3ydLgX',
         popular: true
       },
       {
         id: 'growth',
         name: 'Growth',
-        price: 7900, // $79
+        price: 2900, // $29
         currency: 'usd',
         interval: 'month',
-        stripePriceId: 'price_1TgQrnImrFBa2nkGEfwKKb5f',
+        stripePriceId: 'price_1TgTFTImrFBa2nkGaKkZP27F',
         features: ['Everything in Pro', '50 projects', '5 team seats', 'SSO / SAML', 'Scan history (1 year)', 'Priority support', 'Custom alerts'],
-        cta: 'Coming Soon',
-        ctaLink: 'mailto:praveen@vibe-gate.dev',
+        cta: 'Buy Now',
+        ctaLink: 'https://vibe-gate.dev/api/checkout?priceId=price_1TgTFTImrFBa2nkGaKkZP27F',
         popular: false
       },
       {
