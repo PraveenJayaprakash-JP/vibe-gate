@@ -1,0 +1,101 @@
+name: Vibe Gate Scan
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'URL to scan'
+        required: true
+        type: string
+      threshold:
+        description: 'Minimum grade required (A/B/C/D)'
+        required: false
+        default: 'C'
+        type: string
+  issue_comment:
+    types: [created]
+
+jobs:
+  scan:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.pull_request != null &&
+       contains(github.event.comment.body, '/vibe-gate'))
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: vibe-gate/package-lock.json
+
+      - name: Install dependencies
+        working-directory: vibe-gate
+        run: npm ci
+
+      - name: Install Playwright browsers
+        working-directory: vibe-gate
+        run: npx playwright install --with-deps chromium
+
+      - name: Determine scan URL
+        id: url
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "url=${{ inputs.url }}" >> $GITHUB_OUTPUT
+            echo "threshold=${{ inputs.threshold }}" >> $GITHUB_OUTPUT
+          else
+            COMMENT="${{ github.event.comment.body }}"
+            URL=$(echo "$COMMENT" | grep -oP '(?<=/vibe-gate\s)\S+')
+            echo "url=${URL:-https://example.com}" >> $GITHUB_OUTPUT
+            echo "threshold=C" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run scan
+        id: scan
+        working-directory: vibe-gate
+        run: |
+          node bin/vibe-gate.js ${{ steps.url.outputs.url }} --output html 2>&1 | tee scan-output.txt
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+
+      - name: Check grade threshold
+        working-directory: vibe-gate
+        run: |
+          GRADE=$(grep -oP 'Grade:\s*\K[A-F]' scan-output.txt || echo "F")
+          THRESHOLD="${{ steps.url.outputs.threshold }}"
+          GRADES=("A" "B" "C" "D" "F")
+          GRADE_IDX=$(for i in "${!GRADES[@]}"; do if [ "${GRADES[$i]}" = "$GRADE" ]; then echo $i; fi; done)
+          THRESHOLD_IDX=$(for i in "${!GRADES[@]}"; do if [ "${GRADES[$i]}" = "$THRESHOLD" ]; then echo $i; fi; done)
+          echo "Scan grade: $GRADE (threshold: $THRESHOLD)"
+          if [ "$GRADE_IDX" -gt "$THRESHOLD_IDX" ]; then
+            echo "::error::Grade $GRADE is below threshold $THRESHOLD"
+            exit 1
+          fi
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vibe-gate-report
+          path: vibe-gate/*.html
+
+      - name: Comment scan result on PR
+        if: github.event_name == 'issue_comment'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = 'vibe-gate/scan-output.txt';
+            let summary = 'Scan completed.';
+            if (fs.existsSync(reportPath)) {
+              summary = fs.readFileSync(reportPath, 'utf8').split('\n').slice(0, 20).join('\n');
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## 🛡️ Vibe Gate Scan Results\n\n\`\`\`\n${summary}\n\`\`\`\n\n[View HTML report in artifacts](${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`
+            });

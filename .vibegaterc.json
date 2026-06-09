@@ -1,0 +1,30 @@
+{
+  "probeRoutes": [
+    "/api",
+    "/health",
+    "/admin",
+    "/login",
+    "/signup",
+    "/dashboard"
+  ],
+  "sensitiveSegments": [
+    "admin",
+    "dashboard",
+    "api",
+    "account",
+    "settings",
+    "profile",
+    "checkout",
+    "billing"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "dist",
+    "build",
+    ".git",
+    ".next",
+    "coverage"
+  ],
+  "failBelow": "D",
+  "maxLoadTimeMs": 3000
+}

@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['20', '22']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: vibe-gate/package-lock.json
+
+      - name: Install dependencies
+        working-directory: vibe-gate
+        run: npm ci
+
+      - name: Type check
+        working-directory: vibe-gate
+        run: npx tsc --noEmit
+
+      - name: Install Playwright browsers
+        working-directory: vibe-gate
+        run: npx playwright install --with-deps chromium
+
+      - name: Smoke test (remote URL)
+        working-directory: vibe-gate
+        run: node bin/vibe-gate.js https://example.com
+        continue-on-error: true
+
+      - name: Smoke test (local scan)
+        working-directory: vibe-gate
+        run: node bin/vibe-gate.js scan .
+        continue-on-error: true
