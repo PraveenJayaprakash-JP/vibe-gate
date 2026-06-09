@@ -1,8 +1,13 @@
 # 🛡️ Vibe Gate
 
 <p align="center">
-  <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate/actions"><img src="https://img.shields.io/github/actions/workflow/status/PraveenJayaprakash-JP/vibe-gate/ci.yml?branch=main&style=flat-square&label=CI" alt="CI"></a>
+  <a href="https://vibe-gate.dev"><img alt="Vibe Gate" src="https://vibe-gate.dev/og-image.png"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate/actions"><img src="https://img.shields.io/github/actions/workflow/status/PraveenJayaprakash-JP/vibe-gate/ci.yml?branch=master&style=flat-square&label=CI" alt="CI"></a>
   <a href="https://www.npmjs.com/package/vibe-gate"><img src="https://img.shields.io/npm/v/vibe-gate?style=flat-square" alt="npm version"></a>
+  <a href="https://vibe-gate.dev"><img src="https://img.shields.io/badge/dashboard-vibe--gate.dev-00d4aa?style=flat-square" alt="Dashboard"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/node-%3E%3D20-brightgreen?style=flat-square&logo=node.js&logoColor=white" alt="Node version">
@@ -15,6 +20,8 @@ Scan any web app for broken flows, security holes, and auth gaps — before your
 ```bash
 npx vibe-gate https://your-app.com
 ```
+
+🌐 **Dashboard & analytics**: [vibe-gate.dev](https://vibe-gate.dev) — sign in with GitHub, view scan history, track trends.
 
 ## Quick Start
 

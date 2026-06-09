@@ -17,10 +17,23 @@
     "vibe-coding",
     "ai-code",
     "quality-gate",
-    "security",
-    "testing"
+    "security-scanner",
+    "playwright",
+    "cli",
+    "devtools",
+    "code-quality",
+    "ai-security",
+    "open-source"
   ],
   "license": "MIT",
+  "homepage": "https://vibe-gate.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PraveenJayaprakash-JP/vibe-gate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PraveenJayaprakash-JP/vibe-gate/issues"
+  },
   "files": [
     "bin/",
     "dist/",

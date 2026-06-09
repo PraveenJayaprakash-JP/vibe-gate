@@ -87,3 +87,22 @@ https://github.com/PraveenJayaprakash-JP/vibe-gate
 1. **Show HN** — Go to https://news.ycombinator.com/submit, paste title + body
 2. **Reddit** — Go to each subreddit, submit link post to https://vibe-gate.dev
 3. **X** — Paste the short version with screenshot/GIF
+4. **LinkedIn** — Paste the professional version below
+
+---
+
+## LinkedIn
+
+Been shipping AI-generated web apps faster than ever, but kept catching the same issues post-deploy — broken pages, missing security headers, exposed API keys, unprotected routes.
+
+Built Vibe Gate: a free, open-source CLI that scans any web app in one command.
+
+→ `npx vibe-gate https://your-app.com`
+
+It runs Playwright headless and checks 5 categories — page health, console errors, security headers, secrets detection, auth coverage — then gives you an A–F grade with specific fix recommendations.
+
+CLI is free (MIT). Dashboard with scan history and analytics available at https://vibe-gate.dev
+
+Built with TypeScript, Playwright, Vercel, and Supabase. Would love feedback from the dev community!
+
+#DeveloperTools #OpenSource #AISecurity #WebDev #CLI
