@@ -5,7 +5,9 @@
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/dashboard", "destination": "/web/dashboard/index.html" },
-    { "source": "/:file(.+\\.(png|jpg|svg|ico))", "destination": "/public/:file" },
+    { "source": "/og-image.png", "destination": "/public/og-image.png" },
+    { "source": "/screenshot-hero.png", "destination": "/public/screenshot-hero.png" },
+    { "source": "/screenshot-dashboard.png", "destination": "/public/screenshot-dashboard.png" },
     { "source": "/(.*)", "destination": "/web/index.html" }
   ]
 }
