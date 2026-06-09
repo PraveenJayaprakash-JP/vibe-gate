@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe Gate OG</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1200px; height: 630px; background: #0a0a0b; display: flex; align-items: center; justify-content: center; font-family: system-ui, sans-serif; position: relative; overflow: hidden; }
+.bg-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 40% at 50% 20%, rgba(0,212,170,0.12) 0%, transparent 60%), radial-gradient(ellipse 40% 30% at 80% 70%, rgba(0,212,170,0.06) 0%, transparent 50%); }
+.content { position: relative; text-align: center; }
+.shield { width: 72px; height: 72px; margin: 0 auto 24px; background: rgba(0,212,170,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0,212,170,0.2); }
+h1 { font-size: 56px; font-weight: 700; color: #e8e8ea; letter-spacing: -0.03em; line-height: 1.1; }
+h1 em { color: #00d4aa; font-style: normal; }
+p { font-size: 22px; color: #888890; margin-top: 16px; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+.code { display: inline-flex; align-items: center; gap: 12px; background: #1c1c1f; border: 1px solid #333338; border-radius: 12px; padding: 12px 20px; margin-top: 28px; font-family: 'Courier New', monospace; font-size: 18px; color: #888890; }
+.code span { color: #e8e8ea; }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.15); border-radius: 9999px; font-size: 14px; color: #00d4aa; margin-bottom: 24px; letter-spacing: 0.05em; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: #00d4aa; }
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="content">
+  <div class="badge"><span class="dot"></span> OPEN SOURCE · MIT LICENSE</div>
+  <div class="shield">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+  </div>
+  <h1>Ship AI apps<br><em>without blind spots.</em></h1>
+  <p>One command scans any web app for broken flows,<br>security holes, and auth gaps.</p>
+  <div class="code">$ <span>npx vibe-gate</span> https://your-app.com</div>
+</div>
+</body>
+</html>

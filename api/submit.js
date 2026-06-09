@@ -2,10 +2,14 @@
 // Body: { url, grade, score, summary, categories, recommendations, userId? }
 // Headers: Authorization: Bearer <api_key>
 import { createClient } from '@supabase/supabase-js';
+import rateLimit from '../lib/rate-limit.js';
+
+const limit = rateLimit({ windowMs: 60000, max: 10 });
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   res.setHeader('Access-Control-Allow-Origin', '*');
+  if (!limit(req, res)) return;
 
   try {
     const { url, grade, score, summary, categories, recommendations, userId } = req.body;
