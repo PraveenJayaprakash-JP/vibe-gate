@@ -20,6 +20,7 @@ export default function handler(req, res) {
         price: 2900, // $29
         currency: 'usd',
         interval: 'month',
+        stripePriceId: 'price_1TgQrmImrFBa2nkGuQbl9jcj',
         features: ['Everything in Free', 'Hosted dashboard', 'Scheduled scans (daily)', 'Slack alerts', 'Scan history (90 days)', '10 projects', 'Email support'],
         cta: 'Coming Soon',
         ctaLink: 'mailto:praveen@vibe-gate.dev',
@@ -31,6 +32,7 @@ export default function handler(req, res) {
         price: 7900, // $79
         currency: 'usd',
         interval: 'month',
+        stripePriceId: 'price_1TgQrnImrFBa2nkGEfwKKb5f',
         features: ['Everything in Pro', '50 projects', '5 team seats', 'SSO / SAML', 'Scan history (1 year)', 'Priority support', 'Custom alerts'],
         cta: 'Coming Soon',
         ctaLink: 'mailto:praveen@vibe-gate.dev',
