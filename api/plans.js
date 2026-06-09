@@ -21,9 +21,10 @@ export default function handler(req, res) {
         currency: 'usd',
         interval: 'month',
         stripePriceId: 'price_1TgTFTImrFBa2nkGfL3ydLgX',
+        razorpayPlanId: null, // Set after creating plan in Razorpay dashboard
         features: ['Everything in Free', 'Hosted dashboard', 'Scheduled scans (daily)', 'Slack alerts', 'Scan history (90 days)', '10 projects', 'Email support'],
         cta: 'Buy Now',
-        ctaLink: 'https://vibe-gate.dev/api/checkout?priceId=price_1TgTFTImrFBa2nkGfL3ydLgX',
+        ctaLink: '/api/checkout?planId=price_1TgTFTImrFBa2nkGfL3ydLgX',
         popular: true
       },
       {
@@ -33,9 +34,10 @@ export default function handler(req, res) {
         currency: 'usd',
         interval: 'month',
         stripePriceId: 'price_1TgTFTImrFBa2nkGaKkZP27F',
+        razorpayPlanId: null, // Set after creating plan in Razorpay dashboard
         features: ['Everything in Pro', '50 projects', '5 team seats', 'SSO / SAML', 'Scan history (1 year)', 'Priority support', 'Custom alerts'],
         cta: 'Buy Now',
-        ctaLink: 'https://vibe-gate.dev/api/checkout?priceId=price_1TgTFTImrFBa2nkGaKkZP27F',
+        ctaLink: '/api/checkout?planId=price_1TgTFTImrFBa2nkGaKkZP27F',
         popular: false
       },
       {
