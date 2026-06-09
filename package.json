@@ -1,6 +1,6 @@
 {
   "name": "vibe-gate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Quality gate for AI-generated web apps. Scans for broken flows, security holes, and auth gaps.",
   "bin": {
     "vibe-gate": "./bin/vibe-gate.js"

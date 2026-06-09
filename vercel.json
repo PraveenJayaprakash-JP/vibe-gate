@@ -1,0 +1,10 @@
+{
+  "buildCommand": null,
+  "installCommand": null,
+  "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/dashboard", "destination": "/web/dashboard/index.html" },
+    { "source": "/(.*)", "destination": "/web/index.html" }
+  ]
+}

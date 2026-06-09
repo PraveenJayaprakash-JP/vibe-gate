@@ -42,7 +42,11 @@ export async function submitScan(
       headers,
       body: JSON.stringify({
         url,
-        scanResult: result,
+        grade: result.grade,
+        score: result.score,
+        summary: result.summary,
+        categories: result.categories,
+        recommendations: result.recommendations,
         submittedAt: new Date().toISOString(),
       }),
     });
