@@ -956,7 +956,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // Supabase
-let supabase = null;
+let sbClient = null;
 let currentUser = null;
 let isSignUp = false;
 
@@ -968,7 +968,7 @@ async function initSupabase() {
       console.log('Supabase not configured — running in local mode');
       return false;
     }
-    supabase = window.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey, {
+    sbClient = window.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey, {
       auth: { persistSession: true, autoRefreshToken: true }
     });
     return true;
@@ -1107,18 +1107,18 @@ function escapeHtml(str) {
 }
 
 async function loadScans() {
-  if (!supabase) return;
+  if (!sbClient) return;
   showLoading();
   hideError();
   try {
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    const { data: { user }, error: authError } = await sbClient.auth.getUser();
     if (authError || !user) {
       showAuth();
       return;
     }
     currentUser = user;
     updateUserNav(user);
-    const { data: scans, error } = await supabase
+    const { data: scans, error } = await sbClient
       .from('scan_results')
       .select('*')
       .eq('user_id', user.id)
@@ -1147,10 +1147,10 @@ function updateUserNav(user) {
 }
 
 async function signInWithOAuth(provider) {
-  if (!supabase) return;
+  if (!sbClient) return;
   hideError();
   try {
-    const { error } = await supabase.auth.signInWithOAuth({
+    const { error } = await sbClient.auth.signInWithOAuth({
       provider: provider,
       options: { redirectTo: window.location.href }
     });
@@ -1162,17 +1162,17 @@ async function signInWithOAuth(provider) {
 
 async function signInWithEmail(e) {
   e.preventDefault();
-  if (!supabase) return;
+  if (!sbClient) return;
   hideError();
   const email = document.getElementById('authEmail').value;
   const password = document.getElementById('authPassword').value;
   try {
     if (isSignUp) {
-      const { error } = await supabase.auth.signUp({ email, password });
+      const { error } = await sbClient.auth.signUp({ email, password });
       if (error) throw error;
       alert('Check your email for confirmation link.');
     } else {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { error } = await sbClient.auth.signInWithPassword({ email, password });
       if (error) throw error;
     }
   } catch (e) {
@@ -1181,10 +1181,10 @@ async function signInWithEmail(e) {
 }
 
 async function signOut() {
-  if (!supabase) return;
+  if (!sbClient) return;
   hideError();
   try {
-    const { error } = await supabase.auth.signOut();
+    const { error } = await sbClient.auth.signOut();
     if (error) throw error;
     currentUser = null;
     showAuth();
@@ -1194,10 +1194,10 @@ async function signOut() {
 }
 
 async function deleteScan(id) {
-  if (!supabase) return;
+  if (!sbClient) return;
   hideError();
   try {
-    const { error } = await supabase.from('scan_results').delete().eq('id', id);
+    const { error } = await sbClient.from('scan_results').delete().eq('id', id);
     if (error) throw error;
     await loadScans();
   } catch (e) {
@@ -1223,7 +1223,7 @@ document.getElementById('signOutBtn').addEventListener('click', signOut);
 
 // Init
 initSupabase().then(ok => { if (ok) {
-  supabase.auth.onAuthStateChange((event) => {
+  sbClient.auth.onAuthStateChange((event) => {
     if (event === 'SIGNED_IN' || event === 'SIGNED_OUT' || event === 'USER_UPDATED') {
       loadScans();
     }
