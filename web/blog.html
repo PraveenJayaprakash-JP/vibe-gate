@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Vibe Gate</title>
+<meta name="description" content="Insights, updates, and behind-the-scenes from vibe-gate.">
+<meta name="author" content="Praveen Jayaprakash">
+<meta property="og:title" content="Blog — Vibe Gate">
+<meta property="og:description" content="Insights, updates, and behind-the-scenes from vibe-gate.">
+<meta property="og:url" content="https://vibe-gate.dev/blog">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://vibe-gate.dev/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blog — Vibe Gate">
+<meta name="twitter:description" content="Insights, updates, and behind-the-scenes from vibe-gate.">
+<meta name="theme-color" content="#00d4aa">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300d4aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpath d='M9 12l2 2 4-4'/%3E%3C/svg%3E">
+<link rel="canonical" href="https://vibe-gate.dev/blog">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<style>
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+  --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+  --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+  --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
+  --text-3xl:  clamp(2.5rem,   1rem    + 4vw,    5rem);
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem;    --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem;    --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem;   --space-20: 5rem;   --space-24: 6rem;
+  --radius-sm: 0.375rem; --radius-md: 0.5rem; --radius-lg: 0.75rem;
+  --radius-xl: 1rem; --radius-full: 9999px;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Fira Code', monospace;
+  --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --content-default: 960px;
+  --content-wide: 1200px;
+}
+
+[data-theme="dark"] {
+  --bg:             #0a0a0b;
+  --surface:        #111113;
+  --surface-2:      #161618;
+  --surface-offset: #1c1c1f;
+  --surface-3:      #222226;
+  --divider:        #2a2a2f;
+  --border:         #333338;
+  --text:           #e8e8ea;
+  --text-muted:     #888890;
+  --text-faint:     #4a4a52;
+  --accent:         #00d4aa;
+  --accent-dim:     rgba(0, 212, 170, 0.12);
+  --accent-glow:    rgba(0, 212, 170, 0.06);
+  --warn:           #f59e0b;
+  --warn-dim:       rgba(245, 158, 11, 0.1);
+  --error:          #ef4444;
+  --error-dim:      rgba(239, 68, 68, 0.1);
+  --pass:           #22c55e;
+  --pass-dim:       rgba(34, 197, 94, 0.1);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+}
+
+[data-theme="light"] {
+  --bg:             #f8f8f7;
+  --surface:        #ffffff;
+  --surface-2:      #f3f3f1;
+  --surface-offset: #eceae7;
+  --surface-3:      #e6e4e0;
+  --divider:        #dddbd7;
+  --border:         #d4d2ce;
+  --text:           #18181a;
+  --text-muted:     #6b6b73;
+  --text-faint:     #a0a0aa;
+  --accent:         #00826a;
+  --accent-dim:     rgba(0, 130, 106, 0.1);
+  --accent-glow:    rgba(0, 130, 106, 0.04);
+  --warn:           #d97706;
+  --warn-dim:       rgba(217, 119, 6, 0.1);
+  --error:          #dc2626;
+  --error-dim:      rgba(220, 38, 38, 0.1);
+  --pass:           #16a34a;
+  --pass-dim:       rgba(22, 163, 74, 0.1);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+}
+
+/* ===== BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; color: inherit; }
+::selection { background: var(--accent-dim); color: var(--text); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius-sm); }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-4) var(--space-8);
+  background: oklch(from var(--bg) l c h / 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--divider);
+  transition: background var(--transition);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-sm); font-weight: 600; letter-spacing: -0.01em;
+}
+.nav-logo svg { color: var(--accent); }
+.nav-links { display: flex; align-items: center; gap: var(--space-6); }
+.nav-links a {
+  font-size: var(--text-sm); color: var(--text-muted);
+  transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--text); }
+.nav-right { display: flex; align-items: center; gap: var(--space-3); }
+.btn-nav {
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs); font-weight: 500;
+  color: var(--text-muted);
+  transition: all var(--transition);
+}
+.btn-nav:hover { border-color: var(--text-muted); color: var(--text); }
+.btn-nav.primary {
+  background: var(--accent); border-color: var(--accent);
+  color: #000; font-weight: 600;
+}
+.btn-nav.primary:hover { opacity: 0.88; }
+.theme-toggle {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full); border: 1px solid var(--border);
+  color: var(--text-muted); transition: all var(--transition);
+}
+.theme-toggle:hover { border-color: var(--text-muted); color: var(--text); }
+
+/* ===== LAYOUT ===== */
+.container { max-width: var(--content-default); margin: 0 auto; padding: 0 var(--space-8); }
+.container-wide { max-width: var(--content-wide); margin: 0 auto; padding: 0 var(--space-8); }
+
+/* ===== BLOG HEADER ===== */
+.blog-header {
+  padding: var(--space-24) 0 var(--space-12);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.blog-header::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,212,170,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 60%, rgba(0,212,170,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+.blog-header-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.blog-header h1 {
+  font-size: var(--text-3xl);
+  font-weight: 700; letter-spacing: -0.03em; line-height: 1.05;
+  color: var(--text); margin-bottom: var(--space-4);
+}
+.blog-header h1 em { font-style: normal; color: var(--accent); }
+.blog-header p {
+  font-size: var(--text-lg); color: var(--text-muted);
+  max-width: 50ch; margin: 0 auto;
+  font-weight: 400; line-height: 1.6;
+}
+
+/* ===== BLOG LAYOUT ===== */
+.blog-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--space-12);
+  padding-bottom: var(--space-24);
+}
+
+/* ===== FEATURED POST ===== */
+.featured-post {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  transition: border-color var(--transition), transform var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.featured-post:hover {
+  border-color: rgba(0,212,170,0.25);
+  transform: translateY(-2px);
+}
+.featured-post::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+}
+.featured-label {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: var(--accent-dim); border: 1px solid rgba(0,212,170,0.2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs); font-weight: 600; color: var(--accent);
+  margin-bottom: var(--space-4);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.featured-post h2 {
+  font-size: var(--text-xl);
+  font-weight: 700; letter-spacing: -0.02em; line-height: 1.2;
+  color: var(--text); margin-bottom: var(--space-3);
+}
+.featured-post .post-meta {
+  font-size: var(--text-sm); color: var(--text-faint);
+  font-family: var(--font-mono); margin-bottom: var(--space-4);
+}
+.featured-post .post-excerpt {
+  font-size: var(--text-base); color: var(--text-muted);
+  line-height: 1.7; margin-bottom: var(--space-6);
+}
+.featured-post .post-tags {
+  display: flex; gap: var(--space-2); flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+}
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: var(--radius-full);
+  font-size: 11px; font-weight: 600; font-family: var(--font-mono);
+}
+.tag-accent { background: var(--accent-dim); color: var(--accent); }
+.tag-pass { background: var(--pass-dim); color: var(--pass); }
+.tag-warn { background: var(--warn-dim); color: var(--warn); }
+.tag-error { background: var(--error-dim); color: var(--error); }
+.read-more {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-sm); font-weight: 600; color: var(--accent);
+  transition: gap var(--transition);
+}
+.read-more:hover { gap: var(--space-3); }
+.read-more svg { transition: transform var(--transition); }
+.read-more:hover svg { transform: translateX(3px); }
+
+/* ===== SIDEBAR ===== */
+.sidebar > * + * { margin-top: var(--space-8); }
+.sidebar-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+}
+.sidebar-card h3 {
+  font-size: var(--text-sm); font-weight: 600;
+  color: var(--text); margin-bottom: var(--space-4);
+  letter-spacing: -0.01em;
+}
+.sidebar-card p {
+  font-size: var(--text-sm); color: var(--text-muted);
+  line-height: 1.6;
+}
+.sidebar-card .sidebar-link {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-size: var(--text-sm); font-weight: 500; color: var(--accent);
+  transition: gap var(--transition);
+}
+.sidebar-card .sidebar-link:hover { gap: var(--space-3); }
+.recent-posts-list {
+  list-style: none;
+}
+.recent-posts-list li + li { margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--divider); }
+.recent-posts-list a {
+  font-size: var(--text-sm); font-weight: 500; color: var(--text-muted);
+  transition: color var(--transition);
+  display: block; margin-bottom: var(--space-1);
+}
+.recent-posts-list a:hover { color: var(--text); }
+.recent-posts-list .recent-date {
+  font-size: var(--text-xs); color: var(--text-faint); font-family: var(--font-mono);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--divider);
+}
+.footer-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: var(--space-4);
+}
+.footer-links { display: flex; gap: var(--space-6); }
+.footer-links a { font-size: var(--text-xs); color: var(--text-faint); transition: color var(--transition); }
+.footer-links a:hover { color: var(--text-muted); }
+.footer-copy { font-size: var(--text-xs); color: var(--text-faint); }
+.footer-copy a { color: var(--text-muted); border-bottom: 1px solid var(--divider); }
+.footer-copy a:hover { color: var(--text); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  nav { padding: var(--space-3) var(--space-4); }
+  .nav-links { display: none; }
+  .container, .container-wide { padding: 0 var(--space-4); }
+  .blog-header { padding: var(--space-20) 0 var(--space-8); }
+  .blog-header h1 { letter-spacing: -0.02em; }
+  .blog-layout { grid-template-columns: 1fr; gap: var(--space-8); }
+  .featured-post { padding: var(--space-6); }
+  .sidebar { order: 2; }
+}
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <polyline points="9,12 11,14 15,10"/>
+    </svg>
+    Vibe Gate
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/blog">Blog</a>
+    <a href="/#how">How it works</a>
+    <a href="/#checks">Checks</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/#faq">FAQ</a>
+    <a href="/dashboard">Dashboard</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+    <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" class="btn-nav" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+    <a href="/#install" class="btn-nav primary">Get Started</a>
+  </div>
+</nav>
+
+<!-- BLOG HEADER -->
+<header class="blog-header">
+  <div class="blog-header-content">
+    <h1><em>Blog</em></h1>
+    <p>Insights, updates, and behind-the-scenes from vibe-gate.</p>
+  </div>
+</header>
+
+<!-- BLOG CONTENT -->
+<main class="container-wide blog-layout">
+  <div class="blog-main">
+    <!-- Featured Post -->
+    <article class="featured-post reveal">
+      <div class="featured-label">Featured</div>
+      <h2>Building Vibe Gate: A Quality Gate for AI-Generated Code</h2>
+      <div class="post-meta">June 10, 2026</div>
+      <div class="post-excerpt">
+        <p>We built vibe-gate because we kept shipping broken auth flows, missing error handling, and untested edge cases in AI-generated web apps. The tool scans any deployed URL with Playwright, runs security and UX checks, and gives you a pass/fail report in under a minute.</p>
+        <p style="margin-top: var(--space-4);">The stack is Node.js + Playwright for the scanner, a lightweight Next.js dashboard for visualizing results, and a CLI that wraps it all into one command: <code style="font-family: var(--font-mono); font-size: var(--text-sm); background: var(--surface-offset); padding: 2px 6px; border-radius: var(--radius-sm); color: var(--accent);">npx vibe-gate https://your-app.com</code>. The hardest part was making the checks deterministic across different frameworks — React, Vue, Svelte, or plain HTML all behave differently when it comes to routing, state hydration, and form submission.</p>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-accent">Launch</span>
+        <span class="tag tag-pass">Open Source</span>
+        <span class="tag tag-warn">Dev Tools</span>
+      </div>
+      <a href="#" class="read-more">
+        Read More
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </a>
+    </article>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-card reveal">
+      <h3>About</h3>
+      <p>vibe-gate is an open-source quality gate for AI-generated web apps. Scan any URL for broken flows, security holes, and auth gaps — no config, no signup, just results.</p>
+      <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" class="sidebar-link" target="_blank" rel="noopener">
+        View on GitHub
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="sidebar-card reveal">
+      <h3>Recent Posts</h3>
+      <ul class="recent-posts-list">
+        <li>
+          <a href="#">Building Vibe Gate: A Quality Gate for AI-Generated Code</a>
+          <div class="recent-date">June 10, 2026</div>
+        </li>
+        <li>
+          <a href="#" style="color: var(--text-faint);">More posts coming soon...</a>
+          <div class="recent-date">—</div>
+        </li>
+      </ul>
+    </div>
+  </aside>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="/" class="nav-logo" style="font-size:var(--text-xs)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9,12 11,14 15,10"/></svg>
+        Vibe Gate
+      </a>
+      <div class="footer-links">
+        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate/blob/master/LICENSE" target="_blank" rel="noopener">MIT License</a>
+        <a href="https://vibe-gate.vercel.app/dashboard" target="_blank" rel="noopener">Dashboard</a>
+      </div>
+      <div class="footer-copy">Built by <a href="https://github.com/PraveenJayaprakash-JP" target="_blank" rel="noopener">Praveen Jayaprakash</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Theme toggle
+(function(){
+  const btn = document.querySelector('[data-theme-toggle]');
+  const root = document.documentElement;
+  let theme = 'dark';
+  root.setAttribute('data-theme', theme);
+  if(btn) btn.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', theme);
+    btn.innerHTML = theme === 'dark'
+      ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      : '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  });
+})();
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
