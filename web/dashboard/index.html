@@ -7,42 +7,72 @@
   <meta name="description" content="View your vibe-gate scan results.">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpath d='M9 12l2 2 4-4'/%3E%3C/svg%3E">
+  <style>
+    .dashboard-hero{position:relative;padding:120px 0 40px;overflow:hidden}
+    .dashboard-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 400px at 50% 20%,rgba(99,102,241,.06),transparent);pointer-events:none}
+    .scan-card{position:relative;background:var(--bg-card);border:1px solid var(--bg-border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);margin-bottom:var(--space-6)}
+    .scan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(99,102,241,.3),transparent);pointer-events:none}
+    .scan-grade-letter{text-shadow:0 0 40px currentColor}
+    .scan-cat-fill{width:0 !important}
+    .scan-cat-fill.animate{width:auto !important}
+    .demo-label{display:inline-flex;align-items:center;gap:var(--space-2);font-size:.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-4)}
+    .demo-label::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+    .checks-section{margin-top:var(--space-4);padding:var(--space-4);border-radius:var(--radius-md);background:var(--bg-code);border:1px solid var(--bg-border-subtle)}
+    .checks-section h5{font-size:.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-3)}
+    .check-item{display:flex;align-items:flex-start;gap:var(--space-2);padding:var(--space-1) 0;font-size:.8125rem;color:var(--text-secondary);line-height:1.5}
+    .check-item .icon{width:14px;height:14px;flex-shrink:0;margin-top:3px}
+    .check-item .msg{flex:1}
+    .check-item .msg code{font-family:var(--font-mono);font-size:.75rem;color:var(--accent-hover);background:var(--bg-elevated);padding:1px 4px;border-radius:4px}
+    .error-banner{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-4);border-radius:var(--radius-md);background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:var(--fail);font-size:.875rem;margin-bottom:var(--space-6)}
+    .error-banner svg{width:20px;height:20px;flex-shrink:0}
+    @media(max-width:768px){
+      .dashboard-hero{padding:100px 0 32px}
+      .scan-card-header{flex-direction:column;align-items:flex-start}
+      .scan-grade{align-self:flex-end;margin-top:var(--space-2)}
+    }
+  </style>
 </head>
 <body>
   <!-- Navigation -->
   <nav class="nav">
     <div class="container nav-inner">
-      <a href="/" class="nav-logo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      <a href="/" class="nav-logo" aria-label="Vibe Gate home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
         Vibe Gate
       </a>
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
         <a href="/">Home</a>
         <a href="/#pricing">Pricing</a>
         <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener">GitHub</a>
-        <a href="mailto:praveen@vibe-gate.dev?subject=Vibe%20Gate%20Early%20Access" class="btn btn-primary btn-sm">Request Access</a>
+        <a href="/dashboard" class="btn btn-primary btn-sm" aria-current="page">Dashboard</a>
       </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
   <!-- Dashboard -->
   <main class="dashboard-main">
-    <div class="container">
-      <!-- Header -->
-      <div class="dashboard-header">
-        <h1>Scan Results</h1>
-        <p>View and share your vibe-gate scan reports. Results load automatically when shared with you.</p>
+    <div class="dashboard-hero">
+      <div class="container">
+        <div class="dashboard-header">
+          <h1>Scan Results</h1>
+          <p>View and share your vibe-gate scan reports. Results load automatically when shared with you.</p>
+        </div>
       </div>
+    </div>
 
+    <div class="container">
       <!-- Loading State -->
-      <div class="loading" id="loadingState">
-        <div class="loading-spinner"></div>
+      <div class="loading" id="loadingState" role="status" aria-live="polite">
+        <div class="loading-spinner" aria-hidden="true"></div>
         <p>Loading scan result...</p>
       </div>
 
       <!-- Empty State (no scan ID) -->
-      <div class="dashboard-empty" id="emptyState" style="display:none">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div class="dashboard-empty" id="emptyState" style="display:none" role="region" aria-label="No scan loaded">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <h3>No scan result loaded</h3>
         <p>Share a scan from the CLI with a teammate, or run one yourself:</p>
         <div style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap">
@@ -51,15 +81,22 @@
         </div>
       </div>
 
+      <!-- Error Banner -->
+      <div class="error-banner" id="errorBanner" style="display:none" role="alert" aria-live="assertive">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="errorText">Could not load scan</span>
+      </div>
+
       <!-- Scan Result (populated by JS) -->
-      <div id="scanResult" style="display:none"></div>
+      <div id="scanResult" style="display:none" role="region" aria-label="Scan result"></div>
 
       <!-- Demo preview cards -->
-      <div id="demoCards">
+      <div id="demoCards" role="region" aria-label="Demo scan">
+        <div class="demo-label">Demo Scan</div>
         <div class="scan-card">
           <div class="scan-card-header">
             <div>
-              <p class="text-small text-muted" style="margin-bottom:4px">Sample scan</p>
+              <p class="text-small text-muted" style="margin-bottom:4px">Scanned URL</p>
               <p class="scan-url">https://demo-startup.vercel.app</p>
               <p class="text-small text-muted" style="margin-top:8px">Scanned just now</p>
             </div>
@@ -72,47 +109,56 @@
             <p class="scan-summary">A few minor issues to review before shipping. Address the warnings below to improve your grade.</p>
             <div class="scan-categories">
               <div class="scan-category">
-                <span class="scan-cat-status pass"></span>
+                <span class="scan-cat-status pass" aria-label="Pass"></span>
                 <span class="scan-cat-name">Page Health</span>
-                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" style="width:92%"></div></div>
+                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" data-width="92"></div></div>
                 <span class="scan-cat-score">92%</span>
               </div>
               <div class="scan-category">
-                <span class="scan-cat-status pass"></span>
+                <span class="scan-cat-status pass" aria-label="Pass"></span>
                 <span class="scan-cat-name">Console</span>
-                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" style="width:100%"></div></div>
+                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" data-width="100"></div></div>
                 <span class="scan-cat-score">100%</span>
               </div>
               <div class="scan-category">
-                <span class="scan-cat-status warn"></span>
+                <span class="scan-cat-status warn" aria-label="Warning"></span>
                 <span class="scan-cat-name">Security</span>
-                <div class="scan-cat-bar"><div class="scan-cat-fill grade-c" style="width:63%"></div></div>
+                <div class="scan-cat-bar"><div class="scan-cat-fill grade-c" data-width="63"></div></div>
                 <span class="scan-cat-score">63%</span>
               </div>
               <div class="scan-category">
-                <span class="scan-cat-status pass"></span>
+                <span class="scan-cat-status pass" aria-label="Pass"></span>
                 <span class="scan-cat-name">Secrets</span>
-                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" style="width:100%"></div></div>
+                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" data-width="100"></div></div>
                 <span class="scan-cat-score">100%</span>
               </div>
               <div class="scan-category">
-                <span class="scan-cat-status pass"></span>
+                <span class="scan-cat-status pass" aria-label="Pass"></span>
                 <span class="scan-cat-name">Auth</span>
-                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" style="width:100%"></div></div>
+                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" data-width="100"></div></div>
                 <span class="scan-cat-score">100%</span>
               </div>
             </div>
             <div class="scan-details">
-              <div class="scan-detail"><span class="icon warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="msg">Missing Content-Security-Policy header <em>— Security Headers</em></span></div>
-              <div class="scan-detail"><span class="icon fail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span><span class="msg">Missing Strict-Transport-Security header <em>— Security Headers</em></span></div>
-              <div class="scan-detail"><span class="icon fail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span><span class="msg">Missing X-Frame-Options header <em>— Security Headers</em></span></div>
+              <div class="scan-detail">
+                <span class="icon warn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+                <span class="msg">Missing Content-Security-Policy header <em>— Security Headers</em></span>
+              </div>
+              <div class="scan-detail">
+                <span class="icon fail" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span>
+                <span class="msg">Missing Strict-Transport-Security header <em>— Security Headers</em></span>
+              </div>
+              <div class="scan-detail">
+                <span class="icon fail" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span>
+                <span class="msg">Missing X-Frame-Options header <em>— Security Headers</em></span>
+              </div>
             </div>
           </div>
           <div class="scan-recs">
             <h4>Recommendations</h4>
             <ul>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Add missing security headers: content-security-policy, strict-transport-security, x-frame-options</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Consider adding a login page if this app requires authentication</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Add missing security headers: content-security-policy, strict-transport-security, x-frame-options</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Consider adding a login page if this app requires authentication</li>
             </ul>
           </div>
         </div>
@@ -133,6 +179,21 @@
   </footer>
 
   <script>
+    // Mobile nav toggle
+    document.getElementById('navToggle').addEventListener('click', function() {
+      const links = document.getElementById('navLinks');
+      const expanded = links.classList.toggle('open');
+      this.setAttribute('aria-expanded', expanded);
+    });
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        document.getElementById('navLinks').classList.remove('open');
+        document.getElementById('navToggle').setAttribute('aria-expanded', 'false');
+      });
+    });
+
     // Load scan from URL param
     const params = new URLSearchParams(window.location.search);
     const scanId = params.get('id');
@@ -141,106 +202,206 @@
     const emptyEl = document.getElementById('emptyState');
     const resultEl = document.getElementById('scanResult');
     const demoEl = document.getElementById('demoCards');
+    const errorBanner = document.getElementById('errorBanner');
+    const errorText = document.getElementById('errorText');
 
-    // Grade helper
+    // Grade helper: maps A/B -> green, C -> yellow, D -> orange, F -> red
     function gradeClass(grade) {
-      return 'grade-' + (grade || 'f').toLowerCase();
-    }
-    function statusIcon(status) {
-      if (status === 'pass') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="icon pass"><polyline points="20 6 9 17 4 12"/></svg>';
-      if (status === 'warn') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon warn"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
-      if (status === 'fail') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon fail"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
-      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon info"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
+      const g = (grade || 'F').toString().toUpperCase();
+      if (g === 'A' || g === 'B') return 'grade-b';
+      if (g === 'C') return 'grade-c';
+      if (g === 'D') return 'grade-d';
+      return 'grade-f';
     }
 
+    // Status icon helper
+    function statusIcon(status) {
+      if (status === 'pass') {
+        return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="icon pass" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+      }
+      if (status === 'warn') {
+        return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon warn" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+      }
+      if (status === 'fail') {
+        return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon fail" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+      }
+      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon info" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
+    }
+
+    // Status dot class
+    function statusDotClass(status) {
+      if (status === 'pass') return 'pass';
+      if (status === 'warn') return 'warn';
+      return 'fail';
+    }
+
+    // XSS-safe HTML escape
+    function escapeHtml(text) {
+      if (text == null) return '';
+      const d = document.createElement('div');
+      d.textContent = String(text);
+      return d.innerHTML;
+    }
+
+    // Animate progress bars after render
+    function animateBars(container) {
+      if (!container) return;
+      const fills = container.querySelectorAll('.scan-cat-fill');
+      fills.forEach(function(fill) {
+        const target = fill.getAttribute('data-width');
+        if (target) {
+          fill.style.width = target + '%';
+        }
+      });
+    }
+
+    // Build scan HTML from data object
+    function buildScanHTML(data) {
+      const grade = (data.grade || 'N/A').toString().toUpperCase();
+      const gClass = gradeClass(grade);
+      const cats = Array.isArray(data.categories) ? data.categories : [];
+      const recommendations = Array.isArray(data.recommendations) ? data.recommendations : [];
+
+      // Categories with progress bars
+      const catHTML = cats.map(function(c) {
+        const score = typeof c.score === 'number' ? c.score : 0;
+        const fillClass = gradeClass(
+          score >= 90 ? 'A' :
+          score >= 80 ? 'B' :
+          score >= 70 ? 'C' :
+          score >= 60 ? 'D' : 'F'
+        );
+        const dotClass = statusDotClass(c.status);
+        const checks = Array.isArray(c.checks) ? c.checks : [];
+
+        let checksHTML = '';
+        if (checks.length > 0) {
+          checksHTML = '<div class="checks-section"><h5>Findings</h5>' +
+            checks.map(function(ch) {
+              const chStatus = ch.status || 'info';
+              const chMsg = escapeHtml(ch.message || ch.description || '');
+              const chMeta = ch.source ? '<code>' + escapeHtml(ch.source) + '</code>' : '';
+              return '<div class="check-item">' + statusIcon(chStatus) + '<span class="msg">' + chMsg + (chMeta ? ' — ' + chMeta : '') + '</span></div>';
+            }).join('') + '</div>';
+        }
+
+        return '<div class="scan-category">' +
+          '<span class="scan-cat-status ' + dotClass + '" aria-label="' + escapeHtml(c.status || 'unknown') + '"></span>' +
+          '<span class="scan-cat-name">' + escapeHtml(c.name || 'Category') + '</span>' +
+          '<div class="scan-cat-bar"><div class="scan-cat-fill ' + fillClass + '" data-width="' + score + '"></div></div>' +
+          '<span class="scan-cat-score">' + score + '%</span>' +
+          '</div>' + checksHTML;
+      }).join('');
+
+      // Recommendations
+      let recsHTML = '';
+      if (recommendations.length > 0) {
+        recsHTML = '<div class="scan-recs"><h4>Recommendations</h4><ul>' +
+          recommendations.map(function(r, i) {
+            return '<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' +
+              '<span class="msg">' + escapeHtml(r) + '</span></li>';
+          }).join('') + '</ul></div>';
+      }
+
+      // Timestamp
+      let timeHTML = '';
+      if (data.scannedAt) {
+        try {
+          const d = new Date(data.scannedAt);
+          timeHTML = '<p class="text-small text-muted" style="margin-top:8px">' + d.toLocaleString() + '</p>';
+        } catch (e) {
+          timeHTML = '<p class="text-small text-muted" style="margin-top:8px">' + escapeHtml(String(data.scannedAt)) + '</p>';
+        }
+      }
+
+      return '<div class="scan-card">' +
+        '<div class="scan-card-header">' +
+        '<div>' +
+        '<p class="text-small text-muted" style="margin-bottom:4px">Scanned URL</p>' +
+        '<p class="scan-url">' + escapeHtml(data.url || '') + '</p>' +
+        timeHTML +
+        '</div>' +
+        '<div class="scan-grade ' + gClass + '">' +
+        '<span class="scan-grade-letter">' + escapeHtml(grade) + '</span>' +
+        '<span class="scan-grade-label">Grade</span>' +
+        '</div>' +
+        '</div>' +
+        '<div class="scan-card-body">' +
+        '<p class="scan-summary">' + escapeHtml(data.summary || '') + '</p>' +
+        '<div class="scan-categories">' + catHTML + '</div>' +
+        '</div>' +
+        recsHTML +
+        '</div>';
+    }
+
+    // Render scan into DOM
+    function renderScan(data) {
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = buildScanHTML(data);
+      // Trigger progress bar animations after a brief delay to ensure DOM reflow
+      requestAnimationFrame(function() {
+        setTimeout(function() {
+          animateBars(resultEl);
+        }, 50);
+      });
+    }
+
+    // Main flow
     if (scanId) {
       loadingEl.style.display = 'flex';
+      emptyEl.style.display = 'none';
       demoEl.style.display = 'none';
+      errorBanner.style.display = 'none';
 
-      // Try to fetch from API (falls back to demo data)
       fetch('/api/submit?id=' + encodeURIComponent(scanId))
-        .then(r => r.ok ? r.json() : null)
-        .then(data => {
+        .then(function(r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function(data) {
           loadingEl.style.display = 'none';
-          if (data && data.url && data.grade) {
+          if (data && data.url && data.grade != null) {
             renderScan(data);
           } else {
-            // show demo + message
+            errorText.textContent = 'Scan not found. This ID may have expired.';
+            errorBanner.style.display = 'flex';
             emptyEl.style.display = 'block';
-            emptyEl.querySelector('h3').textContent = 'Scan not found';
-            emptyEl.querySelector('p').textContent = 'This scan ID could not be loaded. It may have expired. Try running a new scan.';
             demoEl.style.display = 'block';
           }
         })
-        .catch(() => {
+        .catch(function(err) {
           loadingEl.style.display = 'none';
+          errorText.textContent = 'Could not load scan: ' + (err.message || 'Network error');
+          errorBanner.style.display = 'flex';
           emptyEl.style.display = 'block';
-          emptyEl.querySelector('h3').textContent = 'Could not load scan';
-          emptyEl.querySelector('p').textContent = 'There was an error loading this scan. Try running a new one.';
           demoEl.style.display = 'block';
         });
     } else {
       loadingEl.style.display = 'none';
       emptyEl.style.display = 'block';
       demoEl.style.display = 'block';
+      errorBanner.style.display = 'none';
+      // Animate demo bars on initial load
+      requestAnimationFrame(function() {
+        setTimeout(function() {
+          animateBars(demoEl);
+        }, 50);
+      });
     }
-
-    function renderScan(data) {
-      resultEl.style.display = 'block';
-      resultEl.innerHTML = buildScanHTML(data);
-    }
-
-    function buildScanHTML(data) {
-      const grade = data.grade || 'N/A';
-      const gClass = gradeClass(grade);
-      const cats = data.categories || [];
-
-      let catHTML = cats.map(c => {
-        const fillClass = gradeClass(c.score >= 90 ? 'a' : c.score >= 80 ? 'b' : c.score >= 70 ? 'c' : c.score >= 60 ? 'd' : 'f');
-        const dotClass = c.status === 'pass' ? 'pass' : c.status === 'warn' ? 'warn' : 'fail';
-        return `<div class="scan-category">
-          <span class="scan-cat-status ${dotClass}"></span>
-          <span class="scan-cat-name">${c.name}</span>
-          <div class="scan-cat-bar"><div class="scan-cat-fill ${fillClass}" style="width:${c.score}%"></div></div>
-          <span class="scan-cat-score">${c.score}%</span>
-        </div>`;
-      }).join('');
-
-      let detailHTML = '';
-      if (data.recommendations && data.recommendations.length) {
-        detailHTML = `<div class="scan-recs">
-          <h4>Recommendations</h4>
-          <ul>${data.recommendations.map(r => `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>${this.escapeHtml(r)}</li>`).join('')}</ul>
-        </div>`;
-      }
-
-      return `<div class="scan-card">
-        <div class="scan-card-header">
-          <div>
-            <p class="text-small text-muted" style="margin-bottom:4px">Scanned URL</p>
-            <p class="scan-url">${this.escapeHtml(data.url || '')}</p>
-            ${data.scannedAt ? `<p class="text-small text-muted" style="margin-top:8px">${new Date(data.scannedAt).toLocaleString()}</p>` : ''}
-          </div>
-          <div class="scan-grade ${gClass}">
-            <span class="scan-grade-letter">${grade}</span>
-            <span class="scan-grade-label">Grade</span>
-          </div>
-        </div>
-        <div class="scan-card-body">
-          <p class="scan-summary">${this.escapeHtml(data.summary || '')}</p>
-          <div class="scan-categories">${catHTML}</div>
-        </div>
-        ${detailHTML}
-      </div>`;
-    }
-
-    // Utils
-    this.escapeHtml = function(text) {
-      if (!text) return '';
-      var d = document.createElement('div');
-      d.textContent = text;
-      return d.innerHTML;
-    };
   </script>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <a href="/">Vibe Gate</a>
+        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate/blob/master/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      </div>
+      <div class="footer-right">
+        Built by <a href="https://github.com/PraveenJayaprakash-JP" target="_blank" rel="noopener" style="color:var(--accent-hover)">Praveen Jayaprakash</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
