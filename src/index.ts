@@ -1,10 +1,12 @@
 import { Command } from 'commander';
+import chalk from 'chalk';
 import { scanUrl } from './scanner/index.js';
 import { scanLocal } from './scanner/localscan.js';
 import { enhanceWithLlm } from './llm.js';
 import { loadConfig, gradeToScore, type VibeGateConfig } from './config.js';
 import { printTerminalReport } from './reporter/index.js';
 import { generateHtmlReport } from './reporter/html.js';
+import { submitScan } from './cloud.js';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
@@ -137,6 +139,42 @@ export async function run() {
         }
       } catch (err) {
         console.error(`\n  Scan failed: ${err instanceof Error ? err.message : String(err)}`);
+        process.exit(1);
+      }
+    });
+
+  // `vibe-gate submit <url>` — scan + upload to cloud
+  program
+    .command('submit')
+    .argument('<url>', 'URL of the web app to scan and submit')
+    .option('-k, --api-key <key>', 'API key for authenticated submission')
+    .description('Scan a URL and upload results to vibe-gate cloud dashboard')
+    .action(async (url: string, options: { apiKey?: string }) => {
+      const opts = program.opts();
+      const verbose = !!opts.verbose;
+
+      let targetUrl: string;
+      try {
+        targetUrl = new URL(url.startsWith('http') ? url : `https://${url}`).href;
+      } catch {
+        console.error('Invalid URL.');
+        process.exit(1);
+      }
+
+      if (verbose) console.error(`\n  Scanning ${targetUrl}...`);
+
+      try {
+        const result = await scanUrl(targetUrl);
+        printTerminalReport(result);
+        console.log('\n  Uploading to vibe-gate cloud...');
+        const submission = await submitScan(targetUrl, options.apiKey);
+        if (submission.success && submission.shareUrl) {
+          console.log(`  ✓ Report saved! View online: ${chalk.cyan(submission.shareUrl)}`);
+        } else {
+          console.log(`  ${submission.error || 'Upload failed — run without submit to see local report'}`);
+        }
+      } catch (err) {
+        console.error(`\n  Failed: ${err instanceof Error ? err.message : String(err)}`);
         process.exit(1);
       }
     });

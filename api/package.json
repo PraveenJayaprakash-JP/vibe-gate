@@ -1,0 +1,7 @@
+{
+  "name": "vibe-gate-api",
+  "private": true,
+  "dependencies": {
+    "stripe": "^17.0.0"
+  }
+}

@@ -24,7 +24,8 @@
   "files": [
     "bin/",
     "dist/",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "dependencies": {
     "chalk": "^5.3.0",

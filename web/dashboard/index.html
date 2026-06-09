@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Vibe Gate</title>
+  <meta name="description" content="View scan results and manage your vibe-gate quality gates.">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+        Vibe Gate
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener">GitHub</a>
+        <span class="btn btn-ghost" style="cursor: default;">Sign In (Soon)</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard Main -->
+  <main class="dashboard-main" style="padding-top: calc(64px + var(--space-8));">
+    <div class="container">
+      <!-- Login Placeholder -->
+      <div class="login-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-primary); margin: 0 auto var(--space-4);">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <h3>Authentication coming soon</h3>
+        <p>Sign in to view your scan history, scheduled scans, and team dashboards. For now, explore a sample scan result below.</p>
+        <a href="mailto:praveen@vibe-gate.dev?subject=Vibe%20Gate%20Dashboard%20Access" class="btn btn-primary">Request Early Access</a>
+      </div>
+
+      <!-- Mock Scan Result -->
+      <div class="scan-card">
+        <div class="scan-card-header">
+          <div>
+            <p class="text-small text-muted" style="margin-bottom: var(--space-1);">Scanned URL</p>
+            <p class="scan-url">https://demo-startup.vercel.app</p>
+            <p class="text-small text-muted" style="margin-top: var(--space-2);">Scanned on June 9, 2026 at 14:32 UTC</p>
+          </div>
+          <div class="scan-meta">
+            <div class="scan-grade c">C</div>
+            <div class="scan-score">
+              <div class="score-value">68%</div>
+              <div class="score-label">Overall Score</div>
+            </div>
+          </div>
+        </div>
+        <div class="scan-card-body">
+          <p class="scan-summary">
+            Your app has solid foundations but needs attention in security headers and mobile responsiveness. 
+            3 critical issues found: missing Content-Security-Policy, no HSTS header, and touch targets below 44px on mobile. 
+            Auth coverage is good with all protected routes properly gated.
+          </p>
+
+          <h4 class="heading-4" style="margin-bottom: var(--space-4);">Category Breakdown</h4>
+          <div class="categories-grid">
+            <div class="category-row">
+              <span class="category-name">Security Headers</span>
+              <div class="category-status">
+                <span class="category-count">2 fails, 1 pass</span>
+                <span class="badge badge-fail">Fail</span>
+              </div>
+            </div>
+            <div class="category-row">
+              <span class="category-name">Auth Coverage</span>
+              <div class="category-status">
+                <span class="category-count">4 passes</span>
+                <span class="badge badge-pass">Pass</span>
+              </div>
+            </div>
+            <div class="category-row">
+              <span class="category-name">Browser Flows</span>
+              <div class="category-status">
+                <span class="category-count">3 passes, 1 warn</span>
+                <span class="badge badge-warn">Warn</span>
+              </div>
+            </div>
+            <div class="category-row">
+              <span class="category-name">Mobile Viewport</span>
+              <div class="category-status">
+                <span class="category-count">1 fail, 2 passes</span>
+                <span class="badge badge-fail">Fail</span>
+              </div>
+            </div>
+            <div class="category-row">
+              <span class="category-name">Secret Detection</span>
+              <div class="category-status">
+                <span class="category-count">No secrets found</span>
+                <span class="badge badge-pass">Pass</span>
+              </div>
+            </div>
+            <div class="category-row">
+              <span class="category-name">Visual Regression</span>
+              <div class="category-status">
+                <span class="category-count">2 passes, 1 warn</span>
+                <span class="badge badge-warn">Warn</span>
+              </div>
+            </div>
+            <div class="category-row">
+              <span class="category-name">Performance</span>
+              <div class="category-status">
+                <span class="category-count">3 passes</span>
+                <span class="badge badge-pass">Pass</span>
+              </div>
+            </div>
+            <div class="category-row">
+              <span class="category-name">Accessibility</span>
+              <div class="category-status">
+                <span class="category-count">2 passes, 2 warns</span>
+                <span class="badge badge-warn">Warn</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--bg-border);">
+            <h4 class="heading-4" style="margin-bottom: var(--space-4);">Recommendations</h4>
+            <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+              <div class="category-row" style="border-left: 3px solid var(--fail);">
+                <div>
+                  <p style="font-weight: var(--font-medium); color: var(--text-primary); margin-bottom: var(--space-1);">Add Content-Security-Policy header</p>
+                  <p style="font-size: var(--text-sm); color: var(--text-secondary);">Prevents XSS attacks by controlling resource loading. Add a strict CSP to your server config.</p>
+                </div>
+                <span class="badge badge-fail">Critical</span>
+              </div>
+              <div class="category-row" style="border-left: 3px solid var(--fail);">
+                <div>
+                  <p style="font-weight: var(--font-medium); color: var(--text-primary); margin-bottom: var(--space-1);">Enable HSTS (Strict-Transport-Security)</p>
+                  <p style="font-size: var(--text-sm); color: var(--text-secondary);">Forces HTTPS connections. Add Strict-Transport-Security header with max-age of at least 31536000.</p>
+                </div>
+                <span class="badge badge-fail">Critical</span>
+              </div>
+              <div class="category-row" style="border-left: 3px solid var(--warn);">
+                <div>
+                  <p style="font-weight: var(--font-medium); color: var(--text-primary); margin-bottom: var(--space-1);">Increase mobile touch targets</p>
+                  <p style="font-size: var(--text-sm); color: var(--text-secondary);">3 buttons on /pricing are below 44x44px. Increase padding or size for better mobile UX.</p>
+                </div>
+                <span class="badge badge-warn">Warning</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:praveen@vibe-gate.dev">Contact</a>
+      </div>
+      <p class="footer-copy">
+        MIT License. Built by <a href="https://github.com/PraveenJayaprakash-JP" target="_blank" rel="noopener" style="color: var(--text-secondary);">Praveen Jayaprakash</a>.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
