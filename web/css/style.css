@@ -1,3 +1,4 @@
+﻿
 /* ===== DESIGN TOKENS ===== */
 :root {
   --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
@@ -94,9 +95,6 @@ nav {
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--divider);
   transition: background var(--transition);
-}
-nav.scrolled {
-  background: oklch(from var(--bg) l c h / 0.95);
 }
 .nav-logo {
   display: flex; align-items: center; gap: var(--space-2);

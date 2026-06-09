@@ -1,40 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vibe Gate — Quality gate for AI-generated web apps</title>
-  <meta name="description" content="Free, open-source CLI that scans any web app for broken flows, security holes, and auth gaps. Ship AI-generated apps with confidence.">
-  <meta name="keywords" content="web app scanner, security scanner, CLI tool, AI-generated apps, vibe coding, quality gate">
-  <meta name="author" content="Praveen Jayaprakash">
-  <meta name="theme-color" content="#0a0a0b">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Vibe Gate — Quality gate for vibe-coded apps">
-  <meta property="og:description" content="Scan any web app for broken flows, security holes, and auth gaps in one command.">
-  <meta property="og:url" content="https://vibe-gate.vercel.app">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://vibe-gate.vercel.app/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:site_name" content="Vibe Gate">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Vibe Gate — Quality gate for vibe-coded apps">
-  <meta name="twitter:description" content="Scan any web app for broken flows, security holes, and auth gaps in one command.">
-  <meta name="twitter:image" content="https://vibe-gate.vercel.app/og-image.png">
-
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300d4aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpath d='M9 12l2 2 4-4'/%3E%3C/svg%3E">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300d4aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpath d='M9 12l2 2 4-4'/%3E%3C/svg%3E">
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:wght@300..700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe Gate — Quality gate for AI-generated web apps</title>
+<meta name="description" content="Scan any web app for broken flows, security holes, and auth gaps in one command. Free, open-source CLI tool.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -410,17 +384,6 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Nav scroll effect
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
-  if (window.pageYOffset > 50) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
-});
 </script>
-
 </body>
 </html>
