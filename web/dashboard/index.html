@@ -4,150 +4,116 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard — Vibe Gate</title>
-  <meta name="description" content="View scan results and manage your vibe-gate quality gates.">
+  <meta name="description" content="View your vibe-gate scan results.">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpath d='M9 12l2 2 4-4'/%3E%3C/svg%3E">
 </head>
 <body>
   <!-- Navigation -->
   <nav class="nav">
     <div class="container nav-inner">
       <a href="/" class="nav-logo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="M9 12l2 2 4-4"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
         Vibe Gate
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
+        <a href="/#pricing">Pricing</a>
         <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener">GitHub</a>
-        <span class="btn btn-ghost" style="cursor: default;">Sign In (Soon)</span>
+        <a href="mailto:praveen@vibe-gate.dev?subject=Vibe%20Gate%20Early%20Access" class="btn btn-primary btn-sm">Request Access</a>
       </div>
     </div>
   </nav>
 
-  <!-- Dashboard Main -->
-  <main class="dashboard-main" style="padding-top: calc(64px + var(--space-8));">
+  <!-- Dashboard -->
+  <main class="dashboard-main">
     <div class="container">
-      <!-- Login Placeholder -->
-      <div class="login-placeholder">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-primary); margin: 0 auto var(--space-4);">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
-        <h3>Authentication coming soon</h3>
-        <p>Sign in to view your scan history, scheduled scans, and team dashboards. For now, explore a sample scan result below.</p>
-        <a href="mailto:praveen@vibe-gate.dev?subject=Vibe%20Gate%20Dashboard%20Access" class="btn btn-primary">Request Early Access</a>
+      <!-- Header -->
+      <div class="dashboard-header">
+        <h1>Scan Results</h1>
+        <p>View and share your vibe-gate scan reports. Results load automatically when shared with you.</p>
       </div>
 
-      <!-- Mock Scan Result -->
-      <div class="scan-card">
-        <div class="scan-card-header">
-          <div>
-            <p class="text-small text-muted" style="margin-bottom: var(--space-1);">Scanned URL</p>
-            <p class="scan-url">https://demo-startup.vercel.app</p>
-            <p class="text-small text-muted" style="margin-top: var(--space-2);">Scanned on June 9, 2026 at 14:32 UTC</p>
-          </div>
-          <div class="scan-meta">
-            <div class="scan-grade c">C</div>
-            <div class="scan-score">
-              <div class="score-value">68%</div>
-              <div class="score-label">Overall Score</div>
-            </div>
-          </div>
+      <!-- Loading State -->
+      <div class="loading" id="loadingState">
+        <div class="loading-spinner"></div>
+        <p>Loading scan result...</p>
+      </div>
+
+      <!-- Empty State (no scan ID) -->
+      <div class="dashboard-empty" id="emptyState" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <h3>No scan result loaded</h3>
+        <p>Share a scan from the CLI with a teammate, or run one yourself:</p>
+        <div style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap">
+          <a href="/#install" class="btn btn-primary">Run a Scan</a>
+          <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub</a>
         </div>
-        <div class="scan-card-body">
-          <p class="scan-summary">
-            Your app has solid foundations but needs attention in security headers and mobile responsiveness. 
-            3 critical issues found: missing Content-Security-Policy, no HSTS header, and touch targets below 44px on mobile. 
-            Auth coverage is good with all protected routes properly gated.
-          </p>
+      </div>
 
-          <h4 class="heading-4" style="margin-bottom: var(--space-4);">Category Breakdown</h4>
-          <div class="categories-grid">
-            <div class="category-row">
-              <span class="category-name">Security Headers</span>
-              <div class="category-status">
-                <span class="category-count">2 fails, 1 pass</span>
-                <span class="badge badge-fail">Fail</span>
-              </div>
+      <!-- Scan Result (populated by JS) -->
+      <div id="scanResult" style="display:none"></div>
+
+      <!-- Demo preview cards -->
+      <div id="demoCards">
+        <div class="scan-card">
+          <div class="scan-card-header">
+            <div>
+              <p class="text-small text-muted" style="margin-bottom:4px">Sample scan</p>
+              <p class="scan-url">https://demo-startup.vercel.app</p>
+              <p class="text-small text-muted" style="margin-top:8px">Scanned just now</p>
             </div>
-            <div class="category-row">
-              <span class="category-name">Auth Coverage</span>
-              <div class="category-status">
-                <span class="category-count">4 passes</span>
-                <span class="badge badge-pass">Pass</span>
-              </div>
-            </div>
-            <div class="category-row">
-              <span class="category-name">Browser Flows</span>
-              <div class="category-status">
-                <span class="category-count">3 passes, 1 warn</span>
-                <span class="badge badge-warn">Warn</span>
-              </div>
-            </div>
-            <div class="category-row">
-              <span class="category-name">Mobile Viewport</span>
-              <div class="category-status">
-                <span class="category-count">1 fail, 2 passes</span>
-                <span class="badge badge-fail">Fail</span>
-              </div>
-            </div>
-            <div class="category-row">
-              <span class="category-name">Secret Detection</span>
-              <div class="category-status">
-                <span class="category-count">No secrets found</span>
-                <span class="badge badge-pass">Pass</span>
-              </div>
-            </div>
-            <div class="category-row">
-              <span class="category-name">Visual Regression</span>
-              <div class="category-status">
-                <span class="category-count">2 passes, 1 warn</span>
-                <span class="badge badge-warn">Warn</span>
-              </div>
-            </div>
-            <div class="category-row">
-              <span class="category-name">Performance</span>
-              <div class="category-status">
-                <span class="category-count">3 passes</span>
-                <span class="badge badge-pass">Pass</span>
-              </div>
-            </div>
-            <div class="category-row">
-              <span class="category-name">Accessibility</span>
-              <div class="category-status">
-                <span class="category-count">2 passes, 2 warns</span>
-                <span class="badge badge-warn">Warn</span>
-              </div>
+            <div class="scan-grade grade-b">
+              <span class="scan-grade-letter">B</span>
+              <span class="scan-grade-label">Grade</span>
             </div>
           </div>
-
-          <div style="margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--bg-border);">
-            <h4 class="heading-4" style="margin-bottom: var(--space-4);">Recommendations</h4>
-            <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-              <div class="category-row" style="border-left: 3px solid var(--fail);">
-                <div>
-                  <p style="font-weight: var(--font-medium); color: var(--text-primary); margin-bottom: var(--space-1);">Add Content-Security-Policy header</p>
-                  <p style="font-size: var(--text-sm); color: var(--text-secondary);">Prevents XSS attacks by controlling resource loading. Add a strict CSP to your server config.</p>
-                </div>
-                <span class="badge badge-fail">Critical</span>
+          <div class="scan-card-body">
+            <p class="scan-summary">A few minor issues to review before shipping. Address the warnings below to improve your grade.</p>
+            <div class="scan-categories">
+              <div class="scan-category">
+                <span class="scan-cat-status pass"></span>
+                <span class="scan-cat-name">Page Health</span>
+                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" style="width:92%"></div></div>
+                <span class="scan-cat-score">92%</span>
               </div>
-              <div class="category-row" style="border-left: 3px solid var(--fail);">
-                <div>
-                  <p style="font-weight: var(--font-medium); color: var(--text-primary); margin-bottom: var(--space-1);">Enable HSTS (Strict-Transport-Security)</p>
-                  <p style="font-size: var(--text-sm); color: var(--text-secondary);">Forces HTTPS connections. Add Strict-Transport-Security header with max-age of at least 31536000.</p>
-                </div>
-                <span class="badge badge-fail">Critical</span>
+              <div class="scan-category">
+                <span class="scan-cat-status pass"></span>
+                <span class="scan-cat-name">Console</span>
+                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" style="width:100%"></div></div>
+                <span class="scan-cat-score">100%</span>
               </div>
-              <div class="category-row" style="border-left: 3px solid var(--warn);">
-                <div>
-                  <p style="font-weight: var(--font-medium); color: var(--text-primary); margin-bottom: var(--space-1);">Increase mobile touch targets</p>
-                  <p style="font-size: var(--text-sm); color: var(--text-secondary);">3 buttons on /pricing are below 44x44px. Increase padding or size for better mobile UX.</p>
-                </div>
-                <span class="badge badge-warn">Warning</span>
+              <div class="scan-category">
+                <span class="scan-cat-status warn"></span>
+                <span class="scan-cat-name">Security</span>
+                <div class="scan-cat-bar"><div class="scan-cat-fill grade-c" style="width:63%"></div></div>
+                <span class="scan-cat-score">63%</span>
+              </div>
+              <div class="scan-category">
+                <span class="scan-cat-status pass"></span>
+                <span class="scan-cat-name">Secrets</span>
+                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" style="width:100%"></div></div>
+                <span class="scan-cat-score">100%</span>
+              </div>
+              <div class="scan-category">
+                <span class="scan-cat-status pass"></span>
+                <span class="scan-cat-name">Auth</span>
+                <div class="scan-cat-bar"><div class="scan-cat-fill grade-a" style="width:100%"></div></div>
+                <span class="scan-cat-score">100%</span>
               </div>
             </div>
+            <div class="scan-details">
+              <div class="scan-detail"><span class="icon warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="msg">Missing Content-Security-Policy header <em>— Security Headers</em></span></div>
+              <div class="scan-detail"><span class="icon fail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span><span class="msg">Missing Strict-Transport-Security header <em>— Security Headers</em></span></div>
+              <div class="scan-detail"><span class="icon fail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span><span class="msg">Missing X-Frame-Options header <em>— Security Headers</em></span></div>
+            </div>
+          </div>
+          <div class="scan-recs">
+            <h4>Recommendations</h4>
+            <ul>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Add missing security headers: content-security-policy, strict-transport-security, x-frame-options</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Consider adding a login page if this app requires authentication</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -155,17 +121,126 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" style="margin-top:var(--space-16)">
     <div class="container footer-inner">
-      <div class="footer-links">
-        <a href="/">Home</a>
+      <div class="footer-left">
+        <a href="/">Vibe Gate</a>
         <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate" target="_blank" rel="noopener">GitHub</a>
-        <a href="mailto:praveen@vibe-gate.dev">Contact</a>
+        <a href="https://github.com/PraveenJayaprakash-JP/vibe-gate/blob/master/LICENSE" target="_blank" rel="noopener">MIT License</a>
       </div>
-      <p class="footer-copy">
-        MIT License. Built by <a href="https://github.com/PraveenJayaprakash-JP" target="_blank" rel="noopener" style="color: var(--text-secondary);">Praveen Jayaprakash</a>.
-      </p>
+      <div class="footer-right">Built by <a href="https://github.com/PraveenJayaprakash-JP" target="_blank" rel="noopener" style="color:var(--accent-hover)">Praveen Jayaprakash</a></div>
     </div>
   </footer>
+
+  <script>
+    // Load scan from URL param
+    const params = new URLSearchParams(window.location.search);
+    const scanId = params.get('id');
+
+    const loadingEl = document.getElementById('loadingState');
+    const emptyEl = document.getElementById('emptyState');
+    const resultEl = document.getElementById('scanResult');
+    const demoEl = document.getElementById('demoCards');
+
+    // Grade helper
+    function gradeClass(grade) {
+      return 'grade-' + (grade || 'f').toLowerCase();
+    }
+    function statusIcon(status) {
+      if (status === 'pass') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="icon pass"><polyline points="20 6 9 17 4 12"/></svg>';
+      if (status === 'warn') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon warn"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+      if (status === 'fail') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon fail"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon info"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
+    }
+
+    if (scanId) {
+      loadingEl.style.display = 'flex';
+      demoEl.style.display = 'none';
+
+      // Try to fetch from API (falls back to demo data)
+      fetch('/api/submit?id=' + encodeURIComponent(scanId))
+        .then(r => r.ok ? r.json() : null)
+        .then(data => {
+          loadingEl.style.display = 'none';
+          if (data && data.url && data.grade) {
+            renderScan(data);
+          } else {
+            // show demo + message
+            emptyEl.style.display = 'block';
+            emptyEl.querySelector('h3').textContent = 'Scan not found';
+            emptyEl.querySelector('p').textContent = 'This scan ID could not be loaded. It may have expired. Try running a new scan.';
+            demoEl.style.display = 'block';
+          }
+        })
+        .catch(() => {
+          loadingEl.style.display = 'none';
+          emptyEl.style.display = 'block';
+          emptyEl.querySelector('h3').textContent = 'Could not load scan';
+          emptyEl.querySelector('p').textContent = 'There was an error loading this scan. Try running a new one.';
+          demoEl.style.display = 'block';
+        });
+    } else {
+      loadingEl.style.display = 'none';
+      emptyEl.style.display = 'block';
+      demoEl.style.display = 'block';
+    }
+
+    function renderScan(data) {
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = buildScanHTML(data);
+    }
+
+    function buildScanHTML(data) {
+      const grade = data.grade || 'N/A';
+      const gClass = gradeClass(grade);
+      const cats = data.categories || [];
+
+      let catHTML = cats.map(c => {
+        const fillClass = gradeClass(c.score >= 90 ? 'a' : c.score >= 80 ? 'b' : c.score >= 70 ? 'c' : c.score >= 60 ? 'd' : 'f');
+        const dotClass = c.status === 'pass' ? 'pass' : c.status === 'warn' ? 'warn' : 'fail';
+        return `<div class="scan-category">
+          <span class="scan-cat-status ${dotClass}"></span>
+          <span class="scan-cat-name">${c.name}</span>
+          <div class="scan-cat-bar"><div class="scan-cat-fill ${fillClass}" style="width:${c.score}%"></div></div>
+          <span class="scan-cat-score">${c.score}%</span>
+        </div>`;
+      }).join('');
+
+      let detailHTML = '';
+      if (data.recommendations && data.recommendations.length) {
+        detailHTML = `<div class="scan-recs">
+          <h4>Recommendations</h4>
+          <ul>${data.recommendations.map(r => `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>${this.escapeHtml(r)}</li>`).join('')}</ul>
+        </div>`;
+      }
+
+      return `<div class="scan-card">
+        <div class="scan-card-header">
+          <div>
+            <p class="text-small text-muted" style="margin-bottom:4px">Scanned URL</p>
+            <p class="scan-url">${this.escapeHtml(data.url || '')}</p>
+            ${data.scannedAt ? `<p class="text-small text-muted" style="margin-top:8px">${new Date(data.scannedAt).toLocaleString()}</p>` : ''}
+          </div>
+          <div class="scan-grade ${gClass}">
+            <span class="scan-grade-letter">${grade}</span>
+            <span class="scan-grade-label">Grade</span>
+          </div>
+        </div>
+        <div class="scan-card-body">
+          <p class="scan-summary">${this.escapeHtml(data.summary || '')}</p>
+          <div class="scan-categories">${catHTML}</div>
+        </div>
+        ${detailHTML}
+      </div>`;
+    }
+
+    // Utils
+    this.escapeHtml = function(text) {
+      if (!text) return '';
+      var d = document.createElement('div');
+      d.textContent = text;
+      return d.innerHTML;
+    };
+  </script>
 </body>
 </html>
