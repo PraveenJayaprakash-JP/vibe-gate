@@ -661,6 +661,162 @@ footer {
 .footer-copy a { color: var(--text-muted); border-bottom: 1px solid var(--divider); }
 .footer-copy a:hover { color: var(--text); }
 
+/* ===== VIEW TOGGLE ===== */
+.view-toggle {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+.view-toggle-btn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.view-toggle-btn:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+.view-toggle-btn.active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+
+/* ===== ANALYTICS ===== */
+.analytics-section {
+  display: none;
+}
+
+/* Stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  text-align: center;
+  transition: border-color var(--transition);
+}
+.stat-card:hover {
+  border-color: var(--divider);
+}
+.stat-value {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+.stat-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Charts */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.chart-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-4);
+}
+.chart-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: 260px;
+}
+.chart-canvas-wrap canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* Recent scans table */
+.recent-scans {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.recent-scans h3 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-4);
+}
+.recent-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.recent-table th,
+.recent-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-size: var(--text-sm);
+}
+.recent-table th {
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: var(--text-xs);
+  border-bottom: 1px solid var(--divider);
+}
+.recent-table td {
+  color: var(--text);
+  border-bottom: 1px solid var(--divider);
+}
+.recent-table tr:last-child td {
+  border-bottom: none;
+}
+.recent-table .grade-cell {
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+.grade-a { color: #22c55e; }
+.grade-b { color: #f59e0b; }
+.grade-c { color: #f97316; }
+.grade-d { color: #ef4444; }
+.grade-f { color: #dc2626; }
+
+/* Empty analytics */
+.analytics-empty {
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  color: var(--text-muted);
+}
+.analytics-empty svg {
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--space-4);
+  opacity: 0.5;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   nav { padding: var(--space-3) var(--space-4); }
@@ -676,12 +832,18 @@ footer {
   .empty-actions .btn-nav { width: 100%; justify-content: center; }
   .auth-card { padding: var(--space-6); }
   .user-email { display: none; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .charts-row { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
   .scan-card-body { padding: var(--space-5); }
   .scan-card-header { padding: var(--space-5); }
   .scan-recs { padding: var(--space-5); }
   .dashboard-empty { padding: var(--space-16) var(--space-4); }
+  .stats-grid { grid-template-columns: 1fr; }
+  .chart-canvas-wrap { height: 200px; }
+  .recent-table th,
+  .recent-table td { padding: var(--space-2) var(--space-3); font-size: var(--text-xs); }
 }
 
 /* ===== REVEAL ANIMATIONS ===== */
@@ -800,6 +962,12 @@ footer {
       <span id="errorText">Could not load scans</span>
     </div>
 
+    <!-- View Toggle -->
+    <div class="view-toggle" id="viewToggle" style="display:none">
+      <button class="view-toggle-btn active" data-view="history">Scan History</button>
+      <button class="view-toggle-btn" data-view="analytics">Analytics</button>
+    </div>
+
     <!-- Scan History List -->
     <div id="scanHistory" style="display:none" role="region" aria-label="Scan history">
       <div class="scan-list-header">
@@ -808,6 +976,9 @@ footer {
       </div>
       <div id="scanList"></div>
     </div>
+
+    <!-- Analytics Section -->
+    <div class="analytics-section" id="analyticsSection" role="region" aria-label="Analytics"></div>
 
     <!-- Demo preview card -->
     <div id="demoCards" role="region" aria-label="Demo scan">
@@ -985,6 +1156,8 @@ function showLoading() {
   document.getElementById('authCard').style.display = 'none';
   document.getElementById('emptyState').style.display = 'none';
   document.getElementById('scanHistory').style.display = 'none';
+  document.getElementById('analyticsSection').style.display = 'none';
+  document.getElementById('viewToggle').style.display = 'none';
   document.getElementById('demoCards').style.display = 'none';
   document.getElementById('errorBanner').style.display = 'none';
 }
@@ -1004,6 +1177,8 @@ function showAuth() {
   document.getElementById('authCard').style.display = 'block';
   document.getElementById('emptyState').style.display = 'none';
   document.getElementById('scanHistory').style.display = 'none';
+  document.getElementById('analyticsSection').style.display = 'none';
+  document.getElementById('viewToggle').style.display = 'none';
   document.getElementById('demoCards').style.display = 'block';
   document.getElementById('getStartedBtn').style.display = 'flex';
   document.getElementById('userNav').style.display = 'none';
@@ -1014,20 +1189,28 @@ function showEmpty() {
   document.getElementById('authCard').style.display = 'none';
   document.getElementById('emptyState').style.display = 'block';
   document.getElementById('scanHistory').style.display = 'none';
+  document.getElementById('analyticsSection').style.display = 'none';
+  document.getElementById('viewToggle').style.display = 'none';
   document.getElementById('demoCards').style.display = 'block';
   document.getElementById('getStartedBtn').style.display = 'none';
   document.getElementById('userNav').style.display = 'flex';
 }
 
 function showScans(scans) {
+  window.currentScans = scans;
   document.getElementById('loadingState').style.display = 'none';
   document.getElementById('authCard').style.display = 'none';
   document.getElementById('emptyState').style.display = 'none';
   document.getElementById('scanHistory').style.display = 'block';
+  document.getElementById('analyticsSection').style.display = 'none';
   document.getElementById('demoCards').style.display = 'block';
   document.getElementById('getStartedBtn').style.display = 'none';
   document.getElementById('userNav').style.display = 'flex';
+  document.getElementById('viewToggle').style.display = 'flex';
+  document.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('[data-view="history"]').classList.add('active');
   renderScanList(scans);
+  renderAnalytics(scans);
 }
 
 function renderScanList(scans) {
@@ -1207,6 +1390,305 @@ async function deleteScan(id) {
   }
 }
 
+/* ===== ANALYTICS ===== */
+function renderAnalytics(scans) {
+  const section = document.getElementById('analyticsSection');
+  if (!scans || scans.length === 0) {
+    section.innerHTML = `
+      <div class="analytics-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p>No data available yet. Run a scan to see analytics.</p>
+      </div>
+    `;
+    return;
+  }
+  section.innerHTML = `
+    <div class="stats-grid" id="statsGrid"></div>
+    <div class="charts-row">
+      <div class="chart-container">
+        <div class="chart-title">Score Trend (Last 10 Scans)</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="scoreTrendCanvas"></canvas>
+        </div>
+      </div>
+      <div class="chart-container">
+        <div class="chart-title">Grade Distribution</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="gradeDistCanvas"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="recent-scans">
+      <h3>Recent Scans</h3>
+      <table class="recent-table" id="recentTable">
+        <thead>
+          <tr><th>URL</th><th>Date</th><th>Grade</th><th>Score</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  `;
+  renderStats(scans);
+  renderRecentScans(scans);
+}
+
+function renderStats(scans) {
+  const total = scans.length;
+  const avgScore = Math.round(scans.reduce((s, sc) => s + (sc.score || 0), 0) / total);
+  const bestGrade = scans.reduce((best, sc) => {
+    const order = { 'A': 5, 'B': 4, 'C': 3, 'D': 2, 'F': 1 };
+    return (order[(sc.grade || 'F').toUpperCase()] || 0) > (order[best] || 0) ? (sc.grade || 'F').toUpperCase() : best;
+  }, 'F');
+  const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const thisWeek = scans.filter(sc => new Date(sc.created_at) >= oneWeekAgo).length;
+
+  const grid = document.getElementById('statsGrid');
+  if (!grid) return;
+  grid.innerHTML = `
+    <div class="stat-card"><div class="stat-value">${total}</div><div class="stat-label">Total Scans</div></div>
+    <div class="stat-card"><div class="stat-value">${avgScore}%</div><div class="stat-label">Average Score</div></div>
+    <div class="stat-card"><div class="stat-value grade-${bestGrade.toLowerCase()}">${bestGrade}</div><div class="stat-label">Best Grade</div></div>
+    <div class="stat-card"><div class="stat-value">${thisWeek}</div><div class="stat-label">Scans This Week</div></div>
+  `;
+}
+
+function setupCanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  return { ctx, width: rect.width, height: rect.height };
+}
+
+function roundRectPath(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function drawScoreTrend(scans) {
+  const canvas = document.getElementById('scoreTrendCanvas');
+  if (!canvas) return;
+  const { ctx, width, height } = setupCanvas(canvas);
+  const recent = scans.slice(0, 10).reverse();
+  if (recent.length === 0) return;
+
+  const padding = { top: 20, right: 20, bottom: 40, left: 40 };
+  const chartW = width - padding.left - padding.right;
+  const chartH = height - padding.top - padding.bottom;
+
+  const points = recent.map((sc, i) => ({
+    x: padding.left + (chartW * i) / Math.max(recent.length - 1, 1),
+    y: padding.top + chartH - (chartH * (sc.score || 0)) / 100
+  }));
+
+  if (points.length === 1) {
+    points.push({ x: padding.left + chartW, y: points[0].y });
+  }
+
+  let progress = 0;
+  function animate() {
+    progress += 0.03;
+    if (progress > 1) progress = 1;
+
+    ctx.clearRect(0, 0, width, height);
+
+    // Axes
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--divider').trim() || '#2a2a2f';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(padding.left, padding.top);
+    ctx.lineTo(padding.left, height - padding.bottom);
+    ctx.lineTo(width - padding.right, height - padding.bottom);
+    ctx.stroke();
+
+    // Grid lines
+    ctx.strokeStyle = 'rgba(42,42,47,0.5)';
+    ctx.setLineDash([4, 4]);
+    for (let i = 0; i <= 4; i++) {
+      const y = padding.top + (chartH * i) / 4;
+      ctx.beginPath();
+      ctx.moveTo(padding.left, y);
+      ctx.lineTo(width - padding.right, y);
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    // Y labels
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#888890';
+    ctx.font = '11px Geist Mono, monospace';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    for (let i = 0; i <= 4; i++) {
+      const val = 100 - (i * 25);
+      const y = padding.top + (chartH * i) / 4;
+      ctx.fillText(val + '%', padding.left - 8, y);
+    }
+
+    // X labels
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    recent.forEach((sc, i) => {
+      const x = padding.left + (chartW * i) / Math.max(recent.length - 1, 1);
+      const date = new Date(sc.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      ctx.fillText(date, x, height - padding.bottom + 8);
+    });
+
+    // Clip for animation
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(padding.left, 0, chartW * progress, height);
+    ctx.clip();
+
+    // Gradient fill
+    const gradient = ctx.createLinearGradient(0, padding.top, 0, height - padding.bottom);
+    gradient.addColorStop(0, 'rgba(0, 212, 170, 0.25)');
+    gradient.addColorStop(1, 'rgba(0, 212, 170, 0)');
+
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, height - padding.bottom);
+    for (let i = 0; i < points.length - 1; i++) {
+      const cp1x = points[i].x + (points[i + 1].x - points[i].x) / 2;
+      const cp1y = points[i].y;
+      const cp2x = points[i + 1].x - (points[i + 1].x - points[i].x) / 2;
+      const cp2y = points[i + 1].y;
+      ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, points[i + 1].x, points[i + 1].y);
+    }
+    ctx.lineTo(points[points.length - 1].x, height - padding.bottom);
+    ctx.closePath();
+    ctx.fillStyle = gradient;
+    ctx.fill();
+
+    // Line
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+    for (let i = 0; i < points.length - 1; i++) {
+      const cp1x = points[i].x + (points[i + 1].x - points[i].x) / 2;
+      const cp1y = points[i].y;
+      const cp2x = points[i + 1].x - (points[i + 1].x - points[i].x) / 2;
+      const cp2y = points[i + 1].y;
+      ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, points[i + 1].x, points[i + 1].y);
+    }
+    ctx.strokeStyle = '#00d4aa';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+
+    // Points
+    points.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#0a0a0b';
+      ctx.fill();
+      ctx.strokeStyle = '#00d4aa';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    });
+
+    ctx.restore();
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+function drawGradeDistribution(scans) {
+  const canvas = document.getElementById('gradeDistCanvas');
+  if (!canvas) return;
+  const { ctx, width, height } = setupCanvas(canvas);
+
+  const grades = ['A', 'B', 'C', 'D', 'F'];
+  const colors = { 'A': '#22c55e', 'B': '#f59e0b', 'C': '#f97316', 'D': '#ef4444', 'F': '#dc2626' };
+  const counts = {};
+  grades.forEach(g => counts[g] = 0);
+  scans.forEach(sc => {
+    const g = (sc.grade || 'F').toUpperCase();
+    if (counts[g] !== undefined) counts[g]++;
+  });
+  const maxCount = Math.max(...Object.values(counts), 1);
+
+  const padding = { top: 20, right: 40, bottom: 20, left: 40 };
+  const chartW = width - padding.left - padding.right;
+  const chartH = height - padding.top - padding.bottom;
+  const barHeight = Math.min(28, (chartH - (grades.length - 1) * 12) / grades.length);
+  const gap = (chartH - grades.length * barHeight) / (grades.length + 1);
+
+  let progress = 0;
+  function animate() {
+    progress += 0.04;
+    if (progress > 1) progress = 1;
+
+    ctx.clearRect(0, 0, width, height);
+
+    grades.forEach((grade, i) => {
+      const y = padding.top + gap + i * (barHeight + gap);
+      const barW = (chartW * (counts[grade] / maxCount)) * progress;
+
+      // Label
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#888890';
+      ctx.font = '12px Geist Mono, monospace';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(grade, padding.left - 10, y + barHeight / 2);
+
+      // Bar bg
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--surface-offset').trim() || '#1c1c1f';
+      roundRectPath(ctx, padding.left, y, chartW, barHeight, 4);
+      ctx.fill();
+
+      // Bar fill
+      if (barW > 0) {
+        ctx.fillStyle = colors[grade];
+        roundRectPath(ctx, padding.left, y, barW, barHeight, 4);
+        ctx.fill();
+      }
+
+      // Count
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#e8e8ea';
+      ctx.font = '11px Geist Mono, monospace';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(String(counts[grade]), padding.left + chartW + 8, y + barHeight / 2);
+    });
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+function renderRecentScans(scans) {
+  const tbody = document.querySelector('#recentTable tbody');
+  if (!tbody) return;
+  const recent = scans.slice(0, 5);
+  tbody.innerHTML = recent.map(sc => {
+    const date = new Date(sc.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    const grade = (sc.grade || 'F').toUpperCase();
+    return `
+      <tr>
+        <td>${escapeHtml(sc.url)}</td>
+        <td>${date}</td>
+        <td class="grade-cell grade-${grade.toLowerCase()}">${grade}</td>
+        <td>${sc.score || 0}%</td>
+      </tr>
+    `;
+  }).join('');
+}
+
 // Auth toggle
 document.getElementById('authToggle').addEventListener('click', () => {
   isSignUp = !isSignUp;
@@ -1219,8 +1701,30 @@ document.getElementById('authToggle').addEventListener('click', () => {
 
 // Event listeners
 document.getElementById('githubOAuth').addEventListener('click', () => signInWithOAuth('github'));
-  document.getElementById('authForm').addEventListener('submit', signInWithEmail);
+document.getElementById('authForm').addEventListener('submit', signInWithEmail);
 document.getElementById('signOutBtn').addEventListener('click', signOut);
+
+// View toggle
+document.querySelectorAll('.view-toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const view = btn.dataset.view;
+    if (view === 'history') {
+      document.getElementById('scanHistory').style.display = 'block';
+      document.getElementById('analyticsSection').style.display = 'none';
+    } else {
+      document.getElementById('scanHistory').style.display = 'none';
+      document.getElementById('analyticsSection').style.display = 'block';
+      if (window.currentScans && window.currentScans.length > 0) {
+        requestAnimationFrame(() => {
+          drawScoreTrend(window.currentScans);
+          drawGradeDistribution(window.currentScans);
+        });
+      }
+    }
+  });
+});
 
 // Init
 initSupabase().then(ok => { if (ok) {
