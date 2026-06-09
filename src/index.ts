@@ -179,6 +179,84 @@ export async function run() {
       }
     });
 
+  // `vibe-gate watch <url>` — re-scan URL on interval
+  program
+    .command('watch')
+    .argument('<url>', 'URL of the web app to monitor')
+    .option('-i, --interval <seconds>', 'Seconds between scans (min 5)', '30')
+    .description('Continuously re-scan a URL at a fixed interval')
+    .action(async (url: string, options: { interval: string }) => {
+      const opts = program.opts();
+      const config = (program as unknown as Record<string, unknown>).config as VibeGateConfig;
+      const verbose = !!opts.verbose;
+      const intervalSec = Math.max(5, parseInt(options.interval, 10) || 30);
+
+      let targetUrl: string;
+      try {
+        targetUrl = new URL(url.startsWith('http') ? url : `https://${url}`).href;
+      } catch {
+        console.error('Invalid URL. Provide a valid web app URL (e.g., https://myapp.vercel.app)');
+        process.exit(1);
+      }
+
+      let previousGrade: string | null = null;
+      let scanCount = 0;
+
+      console.log(chalk.cyan(`\n  Watching ${targetUrl} (every ${intervalSec}s, Ctrl+C to stop)\n`));
+
+      const runScan = async () => {
+        scanCount++;
+        const timestamp = new Date().toLocaleTimeString();
+        process.stdout.write('\x1Bc'); // clear terminal
+
+        console.log(chalk.cyan(`\n  Vibe Gate Watch — ${targetUrl}`));
+        console.log(chalk.dim(`  Scan #${scanCount} at ${timestamp} (interval: ${intervalSec}s)\n`));
+
+        try {
+          let result = await scanUrl(targetUrl);
+
+          if (opts.llm) {
+            const enhanced = await enhanceWithLlm(result, targetUrl, config);
+            if (enhanced.plainEnglishSummary) {
+              result = enhanced as typeof result;
+            }
+          }
+
+          // Trend indicator
+          let trend = '';
+          if (previousGrade !== null) {
+            const prevScore = gradeToScore(previousGrade);
+            const currScore = gradeToScore(result.grade);
+            if (currScore > prevScore) trend = chalk.green(' ↑');
+            else if (currScore < prevScore) trend = chalk.red(' ↓');
+            else trend = chalk.dim(' →');
+          }
+
+          console.log(`  ${chalk.bold('Grade:')} ${gradeToScore(result.grade) >= 80 ? chalk.green(result.grade) : result.grade === 'C' ? chalk.yellow(result.grade) : chalk.red(result.grade)}${trend}  ${chalk.dim(`(${result.score}%)`)}`);
+          console.log(`  ${chalk.dim(result.summary)}\n`);
+
+          printTerminalReport(result);
+
+          previousGrade = result.grade;
+        } catch (err) {
+          console.error(chalk.red(`\n  Scan #${scanCount} failed: ${err instanceof Error ? err.message : String(err)}`));
+        }
+      };
+
+      await runScan();
+
+      const timer = setInterval(runScan, intervalSec * 1000);
+
+      const shutdown = () => {
+        clearInterval(timer);
+        console.log(chalk.dim('\n  Watch stopped.\n'));
+        process.exit(0);
+      };
+
+      process.on('SIGINT', shutdown);
+      process.on('SIGTERM', shutdown);
+    });
+
   // `vibe-gate init` — create config file
   program
     .command('init')

@@ -817,6 +817,321 @@ footer {
   opacity: 0.5;
 }
 
+/* ===== COMPARE ===== */
+.compare-section { display: none; }
+.compare-section.active { display: block; }
+.compare-empty {
+  text-align: center;
+  padding: var(--space-16) var(--space-6);
+  color: var(--text-muted);
+}
+.compare-empty svg {
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--space-4);
+  opacity: 0.5;
+}
+.compare-grid {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+.compare-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6) var(--space-8);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+}
+.compare-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.compare-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+.compare-card-url {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--accent);
+  word-break: break-all;
+}
+.compare-card-meta {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+}
+.compare-card-grade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.compare-card-grade .scan-grade-letter {
+  font-size: 3.5rem;
+}
+.compare-delta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  margin-left: var(--space-2);
+}
+.compare-delta.up {
+  background: var(--pass-dim);
+  color: var(--pass);
+}
+.compare-delta.down {
+  background: var(--error-dim);
+  color: var(--error);
+}
+.compare-delta.same {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+.compare-categories {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.compare-cat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  align-items: center;
+}
+.compare-cat-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-1);
+}
+.compare-cat-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.compare-cat-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--surface-offset);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.compare-cat-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.compare-cat-fill.primary {
+  background: var(--accent);
+}
+.compare-cat-fill.dim {
+  background: rgba(0, 212, 170, 0.35);
+}
+.compare-cat-score {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  min-width: 32px;
+  text-align: right;
+}
+.compare-vs-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) 0;
+}
+.compare-vs-divider span {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md);
+}
+
+/* Scan select checkbox */
+.scan-select {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  z-index: 3;
+}
+.scan-card:has(.scan-select) .scan-card-header {
+  padding-left: var(--space-12);
+}
+
+/* ===== SETTINGS ===== */
+.settings-section { display: none; }
+.settings-section.active { display: block; }
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+.settings-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6) var(--space-8);
+  box-shadow: var(--shadow-md);
+  transition: border-color var(--transition);
+}
+.settings-card:hover {
+  border-color: var(--divider);
+}
+.settings-card h3 {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-4);
+}
+.settings-card.settings-wide {
+  grid-column: 1 / -1;
+}
+.settings-desc {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-2);
+}
+.plan-badge {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border: 1px solid rgba(0,212,170,0.2);
+}
+.seats-display {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+}
+.seats-used {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+.seats-sep {
+  font-size: var(--text-lg);
+  color: var(--text-faint);
+}
+.seats-total {
+  font-size: var(--text-lg);
+  color: var(--text-muted);
+}
+.settings-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.member-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.member-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition);
+}
+.member-row:hover {
+  border-color: var(--divider);
+}
+.member-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--accent-dim);
+  border: 1px solid rgba(0,212,170,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.member-info {
+  flex: 1;
+  min-width: 0;
+}
+.member-name {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text);
+}
+.member-email {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.member-role {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+.member-role.role-owner {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+.member-role.role-member {
+  background: var(--surface-offset);
+  color: var(--text-muted);
+}
+.member-placeholder {
+  opacity: 0.7;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   nav { padding: var(--space-3) var(--space-4); }
@@ -834,6 +1149,13 @@ footer {
   .user-email { display: none; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .charts-row { grid-template-columns: 1fr; }
+  .compare-grid { flex-direction: column; }
+  .compare-vs-divider { padding: var(--space-2) 0; }
+  .settings-grid { grid-template-columns: 1fr; }
+  .settings-card { padding: var(--space-5) var(--space-6); }
+  .settings-card-header { flex-direction: column; align-items: flex-start; }
+  .member-row { padding: var(--space-3); }
+  .scan-card:has(.scan-select) .scan-card-header { padding-left: var(--space-10); }
 }
 @media (max-width: 480px) {
   .scan-card-body { padding: var(--space-5); }
@@ -964,8 +1286,10 @@ footer {
 
     <!-- View Toggle -->
     <div class="view-toggle" id="viewToggle" style="display:none">
-      <button class="view-toggle-btn active" data-view="history">Scan History</button>
+      <button class="view-toggle-btn active" data-view="history">Scans</button>
       <button class="view-toggle-btn" data-view="analytics">Analytics</button>
+      <button class="view-toggle-btn" data-view="compare">Compare</button>
+      <button class="view-toggle-btn" data-view="settings">Settings</button>
     </div>
 
     <!-- Scan History List -->
@@ -979,6 +1303,70 @@ footer {
 
     <!-- Analytics Section -->
     <div class="analytics-section" id="analyticsSection" role="region" aria-label="Analytics"></div>
+
+    <!-- Compare Section -->
+    <div class="compare-section" id="compareSection" role="region" aria-label="Compare scans" style="display:none">
+      <div class="scan-list-header">
+        <h2>Compare Scans</h2>
+        <span class="scan-count" id="compareCount">Select two scans to compare</span>
+      </div>
+      <div class="compare-empty" id="compareEmpty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M9 17H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4"/>
+          <polyline points="9 17 12 14 15 17"/>
+          <line x1="12" y1="14" x2="12" y2="21"/>
+        </svg>
+        <p>Select two scans from your history to compare side-by-side.</p>
+      </div>
+      <div class="compare-content" id="compareContent" style="display:none">
+        <div class="compare-grid" id="compareGrid"></div>
+      </div>
+    </div>
+
+    <!-- Settings Section -->
+    <div class="settings-section" id="settingsSection" role="region" aria-label="Settings" style="display:none">
+      <div class="scan-list-header">
+        <h2>Team Settings</h2>
+      </div>
+      <div class="settings-grid">
+        <div class="settings-card">
+          <h3>Plan</h3>
+          <div class="plan-badge" id="planBadge">Free</div>
+          <p class="settings-desc">Your current billing plan.</p>
+        </div>
+        <div class="settings-card">
+          <h3>Seats</h3>
+          <div class="seats-display">
+            <span class="seats-used" id="seatsUsed">1</span>
+            <span class="seats-sep">/</span>
+            <span class="seats-total" id="seatsTotal">3</span>
+          </div>
+          <p class="settings-desc">Team members used out of total seats.</p>
+        </div>
+        <div class="settings-card settings-wide">
+          <div class="settings-card-header">
+            <h3>Team Members</h3>
+            <button class="btn-submit" id="inviteBtn" style="padding:var(--space-2) var(--space-4);font-size:var(--text-sm)">Invite Member</button>
+          </div>
+          <div class="member-list" id="memberList">
+            <div class="member-row">
+              <div class="member-avatar">YO</div>
+              <div class="member-info">
+                <div class="member-name">You (Owner)</div>
+                <div class="member-email" id="ownerEmail">user@example.com</div>
+              </div>
+              <span class="member-role role-owner">Owner</span>
+            </div>
+            <div class="member-row member-placeholder">
+              <div class="member-avatar" style="background:var(--surface-offset);color:var(--text-faint)">+</div>
+              <div class="member-info">
+                <div class="member-name" style="color:var(--text-faint)">Invite a teammate to collaborate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Demo preview card -->
     <div id="demoCards" role="region" aria-label="Demo scan">
@@ -1157,6 +1545,8 @@ function showLoading() {
   document.getElementById('emptyState').style.display = 'none';
   document.getElementById('scanHistory').style.display = 'none';
   document.getElementById('analyticsSection').style.display = 'none';
+  document.getElementById('compareSection').style.display = 'none';
+  document.getElementById('settingsSection').style.display = 'none';
   document.getElementById('viewToggle').style.display = 'none';
   document.getElementById('demoCards').style.display = 'none';
   document.getElementById('errorBanner').style.display = 'none';
@@ -1173,11 +1563,14 @@ function hideError() {
 }
 
 function showAuth() {
+  selectedCompareIds.clear();
   document.getElementById('loadingState').style.display = 'none';
   document.getElementById('authCard').style.display = 'block';
   document.getElementById('emptyState').style.display = 'none';
   document.getElementById('scanHistory').style.display = 'none';
   document.getElementById('analyticsSection').style.display = 'none';
+  document.getElementById('compareSection').style.display = 'none';
+  document.getElementById('settingsSection').style.display = 'none';
   document.getElementById('viewToggle').style.display = 'none';
   document.getElementById('demoCards').style.display = 'block';
   document.getElementById('getStartedBtn').style.display = 'flex';
@@ -1190,6 +1583,8 @@ function showEmpty() {
   document.getElementById('emptyState').style.display = 'block';
   document.getElementById('scanHistory').style.display = 'none';
   document.getElementById('analyticsSection').style.display = 'none';
+  document.getElementById('compareSection').style.display = 'none';
+  document.getElementById('settingsSection').style.display = 'none';
   document.getElementById('viewToggle').style.display = 'none';
   document.getElementById('demoCards').style.display = 'block';
   document.getElementById('getStartedBtn').style.display = 'none';
@@ -1203,6 +1598,8 @@ function showScans(scans) {
   document.getElementById('emptyState').style.display = 'none';
   document.getElementById('scanHistory').style.display = 'block';
   document.getElementById('analyticsSection').style.display = 'none';
+  document.getElementById('compareSection').style.display = 'none';
+  document.getElementById('settingsSection').style.display = 'none';
   document.getElementById('demoCards').style.display = 'block';
   document.getElementById('getStartedBtn').style.display = 'none';
   document.getElementById('userNav').style.display = 'flex';
@@ -1211,6 +1608,8 @@ function showScans(scans) {
   document.querySelector('[data-view="history"]').classList.add('active');
   renderScanList(scans);
   renderAnalytics(scans);
+  renderCompareList(scans);
+  updateSettingsUser();
 }
 
 function renderScanList(scans) {
@@ -1689,6 +2088,186 @@ function renderRecentScans(scans) {
   }).join('');
 }
 
+/* ===== COMPARE ===== */
+let selectedCompareIds = new Set();
+
+function getGradeValue(grade) {
+  const order = { 'A': 5, 'B': 4, 'C': 3, 'D': 2, 'F': 1 };
+  return order[(grade || 'F').toUpperCase()] || 0;
+}
+
+function renderCompareList(scans) {
+  const section = document.getElementById('compareSection');
+  const empty = document.getElementById('compareEmpty');
+  const content = document.getElementById('compareContent');
+  const count = document.getElementById('compareCount');
+  if (!scans || scans.length === 0) {
+    empty.style.display = 'block';
+    content.style.display = 'none';
+    count.textContent = 'No scans to compare';
+    return;
+  }
+  count.textContent = selectedCompareIds.size === 0 ? 'Select two scans to compare' : selectedCompareIds.size + ' of 2 selected';
+  const selectable = document.getElementById('compareSection').querySelector('.compare-selectable');
+  if (selectedCompareIds.size === 2) {
+    empty.style.display = 'none';
+    content.style.display = 'block';
+    if (selectable) selectable.style.display = 'none';
+    renderComparison(scans);
+  } else {
+    empty.style.display = 'block';
+    content.style.display = 'none';
+    renderCompareSelectable(scans);
+    if (selectable) selectable.style.display = 'block';
+  }
+}
+
+function renderCompareSelectable(scans) {
+  const section = document.getElementById('compareSection');
+  let list = section.querySelector('.compare-selectable');
+  if (!list) {
+    list = document.createElement('div');
+    list.className = 'compare-selectable';
+    list.style.marginBottom = 'var(--space-6)';
+    section.insertBefore(list, document.getElementById('compareEmpty'));
+  }
+  list.innerHTML = scans.map((scan, i) => {
+    const date = new Date(scan.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    const grade = (scan.grade || 'F').toUpperCase();
+    const checked = selectedCompareIds.has(String(scan.id)) ? 'checked' : '';
+    const disabled = !checked && selectedCompareIds.size >= 2 ? 'disabled' : '';
+    return `
+      <div class="scan-card reveal" style="transition-delay:${i * 40}ms;position:relative">
+        <input type="checkbox" class="scan-select" data-id="${scan.id}" ${checked} ${disabled} aria-label="Select scan for comparison">
+        <div class="scan-card-header" style="padding-left:var(--space-12)">
+          <div>
+            <p style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-1)">Scanned URL</p>
+            <p class="scan-url">${escapeHtml(scan.url)}</p>
+            <p class="scan-meta">${date} &middot; Grade ${grade} &middot; ${scan.score || 0}%</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  // Attach checkbox handlers
+  list.querySelectorAll('.scan-select').forEach(cb => {
+    cb.addEventListener('change', (e) => {
+      const id = String(e.target.dataset.id);
+      if (e.target.checked) {
+        if (selectedCompareIds.size < 2) selectedCompareIds.add(id);
+      } else {
+        selectedCompareIds.delete(id);
+      }
+      renderCompareList(window.currentScans || []);
+    });
+  });
+  list.querySelectorAll('.scan-card').forEach(el => observer.observe(el));
+}
+
+function renderComparison(scans) {
+  const ids = Array.from(selectedCompareIds);
+  const selected = ids.map(id => scans.find(s => String(s.id) === id)).filter(Boolean);
+  if (selected.length !== 2) return;
+  const [a, b] = selected;
+  const grid = document.getElementById('compareGrid');
+  const dateA = new Date(a.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  const dateB = new Date(b.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  const gradeA = (a.grade || 'F').toUpperCase();
+  const gradeB = (b.grade || 'F').toUpperCase();
+  const scoreA = a.score || 0;
+  const scoreB = b.score || 0;
+  const gradeDelta = getGradeValue(gradeB) - getGradeValue(gradeA);
+  const scoreDelta = scoreB - scoreA;
+  const gradeIcon = gradeDelta > 0 ? '↑' : gradeDelta < 0 ? '↓' : '→';
+  const scoreIcon = scoreDelta > 0 ? '↑' : scoreDelta < 0 ? '↓' : '→';
+  const gradeDeltaClass = gradeDelta > 0 ? 'up' : gradeDelta < 0 ? 'down' : 'same';
+  const scoreDeltaClass = scoreDelta > 0 ? 'up' : scoreDelta < 0 ? 'down' : 'same';
+
+  const catsA = a.categories || {};
+  const catsB = b.categories || {};
+  const allCats = Array.from(new Set([...Object.keys(catsA), ...Object.keys(catsB)]));
+
+  function renderCatCard(cats, otherCats, isRight) {
+    const allNames = Array.from(new Set([...Object.keys(cats), ...Object.keys(otherCats)]));
+    return allNames.map(name => {
+      const score = typeof cats[name] === 'number' ? cats[name] : (cats[name]?.score || 0);
+      const otherScore = typeof otherCats[name] === 'number' ? otherCats[name] : (otherCats[name]?.score || 0);
+      const delta = isRight ? score - otherScore : otherScore - score;
+      const icon = delta > 0 ? '↑' : delta < 0 ? '↓' : '→';
+      const deltaClass = delta > 0 ? 'up' : delta < 0 ? 'down' : 'same';
+      const fillClass = isRight ? 'dim' : 'primary';
+      return `
+        <div>
+          <div class="compare-cat-label">${name}</div>
+          <div class="compare-cat-bar-wrap">
+            <div class="compare-cat-bar"><div class="compare-cat-fill ${fillClass}" style="width:${score}%"></div></div>
+            <span class="compare-cat-score">${score}%</span>
+            <span class="compare-delta ${deltaClass}" aria-label="${delta > 0 ? 'improved' : delta < 0 ? 'declined' : 'same'}">${icon}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  grid.innerHTML = `
+    <div class="compare-card">
+      <div class="compare-card-header">
+        <div>
+          <p style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-1)">Scanned URL</p>
+          <p class="compare-card-url">${escapeHtml(a.url)}</p>
+          <p class="compare-card-meta">${dateA}</p>
+        </div>
+        <div class="scan-grade grade-${gradeA.toLowerCase()}">
+          <span class="scan-grade-letter">${gradeA}</span>
+          <span class="scan-grade-label">Grade</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-4)">
+        <span style="font-size:var(--text-2xl);font-weight:700;font-family:var(--font-mono);color:var(--text)">${scoreA}%</span>
+        <span class="compare-delta ${scoreDeltaClass}">${scoreIcon}</span>
+      </div>
+      <div class="compare-categories">${renderCatCard(catsA, catsB, false)}</div>
+    </div>
+    <div class="compare-vs-divider"><span>VS</span></div>
+    <div class="compare-card">
+      <div class="compare-card-header">
+        <div>
+          <p style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-1)">Scanned URL</p>
+          <p class="compare-card-url">${escapeHtml(b.url)}</p>
+          <p class="compare-card-meta">${dateB}</p>
+        </div>
+        <div class="scan-grade grade-${gradeB.toLowerCase()}">
+          <span class="scan-grade-letter">${gradeB}</span>
+          <span class="scan-grade-label">Grade</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-4)">
+        <span style="font-size:var(--text-2xl);font-weight:700;font-family:var(--font-mono);color:var(--text)">${scoreB}%</span>
+        <span class="compare-delta ${gradeDeltaClass}">${gradeIcon}</span>
+      </div>
+      <div class="compare-categories">${renderCatCard(catsB, catsA, true)}</div>
+    </div>
+  `;
+  // Animate bars
+  setTimeout(() => {
+    grid.querySelectorAll('.compare-cat-fill').forEach(bar => {
+      bar.style.width = bar.style.width;
+    });
+  }, 50);
+}
+
+/* ===== SETTINGS ===== */
+function updateSettingsUser() {
+  const emailEl = document.getElementById('ownerEmail');
+  if (currentUser && emailEl) {
+    emailEl.textContent = currentUser.email || 'user@example.com';
+  }
+}
+
+document.getElementById('inviteBtn').addEventListener('click', () => {
+  alert('Invite functionality coming soon.');
+});
+
 // Auth toggle
 document.getElementById('authToggle').addEventListener('click', () => {
   isSignUp = !isSignUp;
@@ -1710,18 +2289,18 @@ document.querySelectorAll('.view-toggle-btn').forEach(btn => {
     document.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const view = btn.dataset.view;
-    if (view === 'history') {
-      document.getElementById('scanHistory').style.display = 'block';
-      document.getElementById('analyticsSection').style.display = 'none';
-    } else {
-      document.getElementById('scanHistory').style.display = 'none';
-      document.getElementById('analyticsSection').style.display = 'block';
-      if (window.currentScans && window.currentScans.length > 0) {
-        requestAnimationFrame(() => {
-          drawScoreTrend(window.currentScans);
-          drawGradeDistribution(window.currentScans);
-        });
-      }
+    document.getElementById('scanHistory').style.display = view === 'history' ? 'block' : 'none';
+    document.getElementById('analyticsSection').style.display = view === 'analytics' ? 'block' : 'none';
+    document.getElementById('compareSection').style.display = view === 'compare' ? 'block' : 'none';
+    document.getElementById('settingsSection').style.display = view === 'settings' ? 'block' : 'none';
+    if (view === 'analytics' && window.currentScans && window.currentScans.length > 0) {
+      requestAnimationFrame(() => {
+        drawScoreTrend(window.currentScans);
+        drawGradeDistribution(window.currentScans);
+      });
+    }
+    if (view === 'compare') {
+      renderCompareList(window.currentScans || []);
     }
   });
 });
