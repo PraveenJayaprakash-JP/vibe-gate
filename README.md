@@ -1,4 +1,4 @@
-# 🛡️ Vibe Gate
+# <a href="https://vibe-gate.dev">🛡️ Vibe Gate</a>
 
 <p align="center">
   <a href="https://vibe-gate.dev"><img alt="Vibe Gate" src="https://vibe-gate.dev/og-image.png"></a>
@@ -22,6 +22,17 @@ npx vibe-gate https://your-app.com
 ```
 
 🌐 **Dashboard & analytics**: [vibe-gate.dev](https://vibe-gate.dev) — sign in with GitHub, view scan history, track trends.
+
+---
+
+### Screenshots
+
+<p align="center">
+  <img src="https://vibe-gate.dev/screenshot-hero.png" alt="Vibe Gate CLI and landing page" width="49%">
+  <img src="https://vibe-gate.dev/screenshot-dashboard.png" alt="Vibe Gate Dashboard with scan history and analytics" width="49%">
+</p>
+
+---
 
 ## Quick Start
 
