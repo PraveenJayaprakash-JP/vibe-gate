@@ -106,3 +106,29 @@ CLI is free (MIT). Dashboard with scan history and analytics available at https:
 Built with TypeScript, Playwright, Vercel, and Supabase. Would love feedback from the dev community!
 
 #DeveloperTools #OpenSource #AISecurity #WebDev #CLI
+
+---
+
+## Tweet Thread (X)
+
+1/ I built a free CLI that catches security holes in AI-generated web apps. Here's the story behind vibe-gate 🧵
+
+2/ Ship AI code without blind spots 🛡️
+
+`npx vibe-gate https://your-app.com`
+
+One command scans for:
+• Broken pages
+• Security holes
+• Leaked secrets
+• Auth gaps
+
+3/ CLI is free (MIT). Dashboard at https://vibe-gate.dev has scan history, analytics, team features.
+
+Pro $9/mo · Growth $29/mo
+
+4/ Built with: TypeScript, Playwright, Vercel, Supabase, Stripe.
+
+GitHub → github.com/PraveenJayaprakash-JP/vibe-gate
+
+Try it and let me know what you think 👇

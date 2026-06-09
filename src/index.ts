@@ -147,11 +147,12 @@ export async function run() {
   program
     .command('submit')
     .argument('<url>', 'URL of the web app to scan and submit')
-    .option('-k, --api-key <key>', 'API key for authenticated submission')
+    .option('-k, --api-key <key>', 'API key for authenticated submission (or set VIBE_GATE_API_KEY env var)')
     .description('Scan a URL and upload results to vibe-gate cloud dashboard')
     .action(async (url: string, options: { apiKey?: string }) => {
       const opts = program.opts();
       const verbose = !!opts.verbose;
+      const apiKey = options.apiKey || process.env.VIBE_GATE_API_KEY || undefined;
 
       let targetUrl: string;
       try {
@@ -167,7 +168,7 @@ export async function run() {
         const result = await scanUrl(targetUrl);
         printTerminalReport(result);
         console.log('\n  Uploading to vibe-gate cloud...');
-        const submission = await submitScan(targetUrl, options.apiKey);
+        const submission = await submitScan(targetUrl, apiKey);
         if (submission.success && submission.shareUrl) {
           console.log(`  ✓ Report saved! View online: ${chalk.cyan(submission.shareUrl)}`);
         } else {
