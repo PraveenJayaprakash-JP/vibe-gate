@@ -31,14 +31,11 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-          cache-dependency-path: vibe-gate/package-lock.json
 
       - name: Install dependencies
-        working-directory: vibe-gate
         run: npm ci
 
       - name: Install Playwright browsers
-        working-directory: vibe-gate
         run: npx playwright install --with-deps chromium
 
       - name: Determine scan URL
@@ -56,13 +53,11 @@ jobs:
 
       - name: Run scan
         id: scan
-        working-directory: vibe-gate
         run: |
           node bin/vibe-gate.js ${{ steps.url.outputs.url }} --output html 2>&1 | tee scan-output.txt
           echo "exit_code=$?" >> $GITHUB_OUTPUT
 
       - name: Check grade threshold
-        working-directory: vibe-gate
         run: |
           GRADE=$(grep -oP 'Grade:\s*\K[A-F]' scan-output.txt || echo "F")
           THRESHOLD="${{ steps.url.outputs.threshold }}"
