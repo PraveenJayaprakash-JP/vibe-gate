@@ -2,7 +2,7 @@
 // Body: { url, grade, score, summary, categories, recommendations, userId? }
 // Headers: Authorization: Bearer <api_key>
 import { createClient } from '@supabase/supabase-js';
-import rateLimit from '../lib/rate-limit.js';
+import rateLimit from './rate-limit.js';
 
 const limit = rateLimit({ windowMs: 60000, max: 10 });
 

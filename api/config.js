@@ -1,6 +1,6 @@
 // GET /api/config
 // Returns public frontend config (Supabase URL + anon key)
-import rateLimit from '../lib/rate-limit.js';
+import rateLimit from './rate-limit.js';
 const limit = rateLimit({ windowMs: 60000, max: 60 });
 
 export default function handler(req, res) {

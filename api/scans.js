@@ -1,7 +1,7 @@
 // GET /api/scans?userId=<uuid>  — fetch scan history
 // DELETE /api/scans?id=<uuid>&userId=<uuid>  — delete a scan
 import { createClient } from '@supabase/supabase-js';
-import rateLimit from '../lib/rate-limit.js';
+import rateLimit from './rate-limit.js';
 const limit = rateLimit({ windowMs: 60000, max: 30 });
 
 export default async function handler(req, res) {

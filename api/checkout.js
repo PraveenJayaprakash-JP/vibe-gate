@@ -1,7 +1,7 @@
 // POST /api/checkout
 // Body: { priceId: string, successUrl: string, cancelUrl: string }
 import Stripe from 'stripe';
-import rateLimit from '../lib/rate-limit.js';
+import rateLimit from './rate-limit.js';
 const limit = rateLimit({ windowMs: 60000, max: 10 });
 
 export default async function handler(req, res) {
